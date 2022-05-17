@@ -16,8 +16,9 @@
         <entry key="..\:/Users/alipy/AndroidStudioProjects/IQCollections/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1785" />
         <entry key="..\:/Users/msilv/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_introductory.xml" value="0.1933876811594203" />
         <entry key="..\:/Users/msilv/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_login.xml" value="0.2674772036474164" />
-        <entry key="..\:/Users/msilv/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/login_tab_fragment.xml" value="0.1933876811594203" />
-        <entry key="..\:/Users/msilv/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/signup_tab_fragment.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/msilv/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_main.xml" value="0.55" />
+        <entry key="..\:/Users/msilv/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/login_tab_fragment.xml" value="0.4" />
+        <entry key="..\:/Users/msilv/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/signup_tab_fragment.xml" value="0.536" />
       </map>
     </option>
   </component>

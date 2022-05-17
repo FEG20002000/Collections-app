@@ -14,7 +14,7 @@ public class LoginTabFragment extends Fragment {
     private View email, pass;
     private TextView forgetPass;
     private Button login;
-    private float v=1;
+    private float v=0;
 
     @Override
     public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState){
