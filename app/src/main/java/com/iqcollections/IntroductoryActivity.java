@@ -2,14 +2,17 @@ package com.iqcollections;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class IntroductoryActivity extends AppCompatActivity {
 
-    ImageView logo, splashImg;
-    TextView app_name;
+    private ImageView logo, splashImg;
+    private TextView app_name;
+    private final int splashdelay = 5000;
     //LottieAnimationView lottieAnimationView;
 
     @Override
@@ -22,10 +25,18 @@ public class IntroductoryActivity extends AppCompatActivity {
         //splashImg = findViewById(R.id.splashImg);
         //lottieAnimationView = findViewById(R.id.lottie)
 
-        splashImg.animate().translationY(-1600).setDuration(1000).setStartDelay(4000);
+       // splashImg.animate().translationY(-1600).setDuration(1000).setStartDelay(4000);
         logo.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
         app_name.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
         //lottieAnimationView.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(IntroductoryActivity.this,LoginActivity.class));
+                finish();
+            }
+        },splashdelay);
+
 
 
     }

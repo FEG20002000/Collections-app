@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 public class LoginTabFragment extends Fragment {
 
     private View email, pass;
-    TextView forgetPass;
-    Button login;
-    float v=0;
+    private TextView forgetPass;
+    private Button login;
+    private float v=1;
 
     @Override
     public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState){
@@ -23,7 +23,7 @@ public class LoginTabFragment extends Fragment {
         email = root.findViewById(R.id.email);
         pass = root.findViewById(R.id.pass);
         forgetPass = root.findViewById(R.id.forget_pass);
-        login = root.findViewById(R.id.button);
+        login = root.findViewById(R.id.btnLogin);
 
         email.setTranslationX(800);
         pass.setTranslationX(800);

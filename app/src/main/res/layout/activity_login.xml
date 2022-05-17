@@ -84,7 +84,7 @@
         android:fontFamily="serif"
         android:text="Welcome to IQ Collections"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintVertical_bias=".2"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
