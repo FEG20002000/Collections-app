@@ -6,7 +6,7 @@
     android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@color/white"
     tools:context=".MainActivity"
     app:layoutDescription="@xml/mainact_nav_scnene">
 
@@ -19,7 +19,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navheader"
         app:menu="@menu/nav_menu" />
-
     <GridView
         android:id="@+id/grdMain"
         android:layout_width="381dp"
