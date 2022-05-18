@@ -1,6 +1,7 @@
 package com.iqcollections;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -11,6 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+   private  GoogleSignInOptions gsi;
+   private GoogleSignInClient gsc;
     private TabLayout tabLayout;
     private ViewPager viewPager;
    private FloatingActionButton google;
@@ -118,9 +126,31 @@ btnLogin.setOnClickListener(new View.OnClickListener() {
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                gsi = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+                gsc = GoogleSignIn.getClient(LoginActivity.this,gsi);
+                Intent signingoogle = gsc.getSignInIntent();
+                startActivityForResult(signingoogle,1000);
 
             }
         });
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1000){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            try{
+                task.getResult(ApiException.class);
+
+            } catch (ApiException e) {
+                Toast.makeText(this, "An error has occured", Toast.LENGTH_SHORT).show();
+            }
+
+        }
 
     }
 }
