@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".createItem"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <Space
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgLogcreateitem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="128dp"
+                    android:src="@drawable/logo" />
+
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="15dp" />
+
+                <TextView
+                    android:id="@+id/txtItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Create an item!"
+                    android:textColor="@color/black"
+                    android:textFontWeight="3"
+                    android:textSize="30sp" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <EditText
+                    android:id="@+id/edtitemname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Please enter an item name" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <ImageView
+                    android:id="@+id/imgItemhold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <Button
+                    android:id="@+id/selectitemimg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Select Image" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <EditText
+                    android:id="@+id/edtitemDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Please enter a description" />
+
+                <DatePicker
+                    android:id="@+id/dtpItemDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <Button
+                    android:id="@+id/btnCreateitem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Create!" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="15dp" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
