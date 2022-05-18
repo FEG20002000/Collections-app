@@ -11,22 +11,22 @@
         android:theme="@style/Theme.IQCollections">
         <activity
             android:name=".wishlist"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".listItem"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".itemDetail"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".createItem"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".createCollection"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".favourite"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true" />
