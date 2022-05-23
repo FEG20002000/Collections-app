@@ -53,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         edtRegisterEmail = findViewById(R.id.email2);
         edtRegisterPass1 = findViewById(R.id.pass2);
         edtRegisterPass2 = findViewById(R.id.confirm_pass2);
+        gsi = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(LoginActivity.this,gsi);
 
         tabLayout.addTab(tabLayout.newTab().setText("Login"));
         tabLayout.addTab(tabLayout.newTab().setText("Sign Up"));
@@ -73,12 +75,27 @@ public class LoginActivity extends AppCompatActivity {
 
     google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
     google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
+    google.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
 
-
+        googleSignIn();
+    }
+});
 
 
     }
 
+    public void googleSignIn(){
+        Intent signInIntent  = gsc.getSignInIntent();
+        startActivityForResult(signInIntent,1000);
+
+
+    }
+    public void navFromGoogle(){
+        finish();
+        startActivity(new Intent(this,MainActivity.class));
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -88,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             try{
                 task.getResult(ApiException.class);
-
+                navFromGoogle();
             } catch (ApiException e) {
                 Toast.makeText(this, "An error has occured", Toast.LENGTH_SHORT).show();
             }

@@ -9,17 +9,26 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.iqcollections.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    private GoogleSignInOptions gsi;
+    private GoogleSignInClient gsc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+
         //adding name of collection pull from Database
         String[] collectionName = {"Car","IT","PC"};
        //adding images to an array must pull from database
