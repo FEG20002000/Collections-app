@@ -3,10 +3,11 @@
     <item android:drawable="@color/slateGrey" />
     <item>
         <bitmap
-            android:src="@drawable/logo"
+            android:src="@drawable/label"
             android:gravity="center">
         </bitmap>
 
     </item>
+
 
 </layer-list>
