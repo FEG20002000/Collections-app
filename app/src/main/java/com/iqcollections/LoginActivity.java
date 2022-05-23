@@ -82,9 +82,11 @@ public class LoginActivity extends AppCompatActivity {
         googleSignIn();
     }
 });
-
-
     }
+public void toaster(String message){
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+
 
     public void googleSignIn(){
         Intent signInIntent  = gsc.getSignInIntent();
@@ -107,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 task.getResult(ApiException.class);
                 navFromGoogle();
             } catch (ApiException e) {
-                Toast.makeText(this, "An error has occured", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "An error has occured"+e.toString(), Toast.LENGTH_SHORT).show();
             }
 
         }
