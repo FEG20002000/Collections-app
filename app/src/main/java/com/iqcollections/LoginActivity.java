@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -68,74 +69,16 @@ public class LoginActivity extends AppCompatActivity {
 
     google.setAlpha(v);
     tabLayout.setAlpha(v);
+    //startActivity(new Intent(this,LoginTabFragment.class));
 
     google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
     google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
 
-btnLogin.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        String userEmail = edtLoginUser.getText().toString();
-        String userPass = edtLoginPassword.getText().toString();
-        if(userEmail.isEmpty() || userPass.isEmpty()){
-            Toast.makeText(LoginActivity.this, "Email or password is empty", Toast.LENGTH_SHORT).show();
 
-        }else{
-            mAuth.signInWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                    }else
-                    {
-                        Toast.makeText(LoginActivity.this, "Login Failure "+task.getException(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
-});
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String userEmail = edtRegisterEmail.getText().toString();
-                String userPass = edtRegisterPass1.getText().toString();
-                if(userEmail.isEmpty() || userPass.isEmpty() ||(userPass.equals(edtRegisterPass2.getText().toString()))){//checking if the username or password is not empty and password check matches
-                    Toast.makeText(LoginActivity.this, "Email or password is empty or passwords do not match", Toast.LENGTH_SHORT).show();
-                }else{
-
-                    mAuth.createUserWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            if (task.isSuccessful()){
-                                Toast.makeText(LoginActivity.this, "Succesfully Registered, You may now login", Toast.LENGTH_SHORT).show();
-
-
-                            }else {
-                                Toast.makeText(LoginActivity.this, "An Error has occured "+ task.getException(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
-
-        google.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gsi = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-                gsc = GoogleSignIn.getClient(LoginActivity.this,gsi);
-                Intent signingoogle = gsc.getSignInIntent();
-                startActivityForResult(signingoogle,1000);
-
-            }
-        });
 
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

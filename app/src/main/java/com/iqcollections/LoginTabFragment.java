@@ -1,21 +1,30 @@
 package com.iqcollections;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginTabFragment extends Fragment {
 
-    private View email, pass;
+    private EditText email, pass;
     private TextView forgetPass;
     private Button login;
     private float v=0;
-
+    private FirebaseAuth mAuth;
     @Override
     public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState){
         ViewGroup root = (ViewGroup) inflator.inflate(R.layout.login_tab_fragment,container, false);
@@ -24,6 +33,7 @@ public class LoginTabFragment extends Fragment {
         pass = root.findViewById(R.id.pass);
         forgetPass = root.findViewById(R.id.forget_pass);
         login = root.findViewById(R.id.btnLogin);
+        mAuth = FirebaseAuth.getInstance();
 
         email.setTranslationX(800);
         pass.setTranslationX(800);
@@ -40,8 +50,31 @@ public class LoginTabFragment extends Fragment {
         forgetPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         login.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userEmail = email.getText().toString();
+                String userPass = pass.getText().toString();
+                if(userEmail.isEmpty() || userPass.isEmpty()){
 
+
+                }else{
+                    mAuth.signInWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                            startActivity(new Intent(getActivity(),MainActivity.class));
+                            }else
+                            {
+
+                            }
+                        }
+                    });
+                }
+            }
+        });
 
         return root;
     }
+
 }
