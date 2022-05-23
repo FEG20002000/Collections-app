@@ -57,7 +57,7 @@ public class LoginTabFragment extends Fragment {
                 String userEmail = email.getText().toString();
                 String userPass = pass.getText().toString();
                 if(userEmail.isEmpty() || userPass.isEmpty()){
-        lg.toaster("Error fields cannot be empty");
+                    Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_SHORT).show();
 
                 }else{
                     mAuth.signInWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -67,7 +67,7 @@ public class LoginTabFragment extends Fragment {
                             startActivity(new Intent(getActivity(),MainActivity.class));
                             }else
                             {
-                            lg.toaster("error could not sign in");
+                                Toast.makeText(getActivity(), "error could not sign in", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

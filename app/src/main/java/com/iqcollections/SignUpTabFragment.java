@@ -41,17 +41,17 @@ public class SignUpTabFragment extends Fragment {
                 String userPasscon =  edtRegisterPass2.getText().toString();
 
                 if(userEmail.isEmpty() || userPass.isEmpty() ||(!userPass.equals(userPasscon))){
-
+                    Toast.makeText(getActivity(), "You cannot leave the fields blank/Check if your passwords match", Toast.LENGTH_SHORT).show();
                 }else{
                     mAuth.createUserWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if (task.isSuccessful()){
-                                startActivity(new Intent(getActivity(),LoginActivity.class));
+                                Toast.makeText(getActivity(), "Succesfull Sign Up!", Toast.LENGTH_SHORT).show();
 
                             }else {
-
+                                Toast.makeText(getActivity(), "An error has occured"+task.getException(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
