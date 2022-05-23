@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/drawable/splashscreen_bg.xml" value="0.196" />
+        <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_login.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_main.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/menu/main_drawer.xml" value="0.33" />
         <entry key="..\:/Users/alipy/AndroidStudioProjects/IQCollections/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1785" />
         <entry key="..\:/Users/alipy/AndroidStudioProjects/IQCollections/app/src/main/res/drawable/button_bg.xml" value="0.107" />
