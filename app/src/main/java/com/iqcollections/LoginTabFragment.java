@@ -49,6 +49,7 @@ public class LoginTabFragment extends Fragment {
         pass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         forgetPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         login.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
+        LoginActivity lg = new LoginActivity();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +57,7 @@ public class LoginTabFragment extends Fragment {
                 String userEmail = email.getText().toString();
                 String userPass = pass.getText().toString();
                 if(userEmail.isEmpty() || userPass.isEmpty()){
-
+        lg.toaster("Error fields cannot be empty");
 
                 }else{
                     mAuth.signInWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -66,7 +67,7 @@ public class LoginTabFragment extends Fragment {
                             startActivity(new Intent(getActivity(),MainActivity.class));
                             }else
                             {
-
+                            lg.toaster("error could not sign in");
                             }
                         }
                     });
