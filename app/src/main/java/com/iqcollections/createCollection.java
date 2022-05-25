@@ -35,7 +35,7 @@ public class createCollection extends AppCompatActivity {
     private DatabaseReference collectionDbRef;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private Uri imgURI;
-    private String modelUri;
+    String modelUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +66,17 @@ public class createCollection extends AppCompatActivity {
         createCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertCollectionData();
+                uploadImage(imgURI);//uploads image then runs insert data with in it
+
                 Context context = view.getContext();
-                Intent intent = new Intent(context, createCollection.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(createCollection.this, "Collection successfully created", Toast.LENGTH_SHORT).show();
             }
         });
     }
     private void insertCollectionData() {
-        uploadImage(imgURI);//for image url
+
 
         String colName = name.getText().toString();
         String colDescription = description.getText().toString();
@@ -93,8 +94,8 @@ public class createCollection extends AppCompatActivity {
                     fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-
                             modelUri = uri.toString();
+                            insertCollectionData();//has to run here or bugs out for what ever reason
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
