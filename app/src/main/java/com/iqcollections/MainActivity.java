@@ -9,12 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.iqcollections.databinding.ActivityMainBinding;
 
 
@@ -22,25 +18,15 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private GoogleSignInOptions gsi;
     private GoogleSignInClient gsc;
-        private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        gsi = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
 
-        gsc = GoogleSignIn.getClient(this,gsi);
-        GoogleSignInAccount gacct = GoogleSignIn.getLastSignedInAccount(this);
-
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-
-
-        if(gacct!=null){
-        }
 
 
         //adding name of collection pull from Database

@@ -1,6 +1,5 @@
 package com.iqcollections;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,20 @@ public class SignUpTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState){
         ViewGroup root = (ViewGroup) inflator.inflate(R.layout.signup_tab_fragment,container, false);
+        mAuth = FirebaseAuth.getInstance();
+        edtRegisterEmail = root.findViewById(R.id.email2);
+        edtRegisterUser = root.findViewById(R.id.username);
+        edtRegisterPass1 = root.findViewById(R.id.pass2);
+        edtRegisterPass2 = root.findViewById(R.id.confirm_pass2);
+        btnRegister = root.findViewById(R.id.btnRegister);
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                register();
+            }
+        });
+
 
         mAuth = FirebaseAuth.getInstance();
         edtRegisterEmail = root.findViewById(R.id.email2);
@@ -62,6 +75,34 @@ public class SignUpTabFragment extends Fragment {
 
 
         return root;
+    }
+    public void register(){
+        LoginActivity lg = new LoginActivity();
+        String userEmail = edtRegisterEmail.getText().toString();
+        String userPass = edtRegisterUser.getText().toString();
+        String userPasscon =  edtRegisterPass2.getText().toString();
+        if(userEmail.isEmpty() || userPass.isEmpty() || (!userPass.equals(userPasscon))){
+
+        }else{
+
+            mAuth.createUserWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    if (task.isSuccessful()){
+
+
+                       lg.toaster("You may now sign in");
+
+                    }else {
+                     lg.toaster("An Error has occurred "+ task.getException());
+                    }
+                }
+            });
+
+        }
+
+
     }
 
 
