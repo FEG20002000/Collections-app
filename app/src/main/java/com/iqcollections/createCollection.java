@@ -56,7 +56,10 @@ public class createCollection extends AppCompatActivity {
         imgSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent ,2);//sending image intent
             }
         });
 

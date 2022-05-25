@@ -65,7 +65,7 @@ public class LoginTabFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 Context context = view.getContext();
-                                Intent intent = new Intent(context, createCollection.class);
+                                Intent intent = new Intent(context, MainActivity.class);
                                 startActivity(intent);
                                 //startActivity(new Intent(getActivity(),MainActivity.class));
                             }else
