@@ -15,7 +15,23 @@ public class Collections {
         return colName;
     }
 
+    public void setColName(String colName) {
+        this.colName = colName;
+    }
+
     public String getColDescription() {
         return colDescription;
+    }
+
+    public void setColDescription(String colDescription) {
+        this.colDescription = colDescription;
+    }
+
+    public String getColImgUrl() {
+        return colImgUrl;
+    }
+
+    public void setColImgUrl(String colImgUrl) {
+        this.colImgUrl = colImgUrl;
     }
 }
