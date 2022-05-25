@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,8 +21,8 @@ public class createCollection extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText name, description;
     private ImageView imgDisplay;
-
-    DatabaseReference collectionDbRef;
+    private FirebaseUser uid;
+    private DatabaseReference collectionDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,9 @@ public class createCollection extends AppCompatActivity {
         imgSelection = findViewById(R.id.selectImg);
         createCollection = findViewById(R.id.btnCreateColl);
 
-        collectionDbRef = FirebaseDatabase.getInstance().getReference().child("Collections");
+
+        collectionDbRef = FirebaseDatabase.getInstance().getReference().child("Collections");//setting the collection name
+        uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
 
         createCollection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +56,6 @@ public class createCollection extends AppCompatActivity {
         String colDescription = description.getText().toString();
 
         Collections collections = new Collections(colName, colDescription);
-        collectionDbRef.push().setValue(collections);
+        collectionDbRef.child(uid.getUid()).push().setValue(collections);
     }
 }
