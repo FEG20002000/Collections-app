@@ -1,12 +1,15 @@
 package com.iqcollections;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,22 +26,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
+        //binding for gridview
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
 
 
-        //adding name of collection pull from Database
+        //adding name of collection pull from Database to griveiw
         String[] collectionName = {"Car","IT","PC"};
-       //adding images to an array must pull from database
+       //adding images to an array must pull from database to grid view
         int[] collectionIMg = {R.drawable.background,R.drawable.background,R.drawable.background};
 
         grid_adapter gridAdapter = new grid_adapter(MainActivity.this, collectionName, collectionIMg) {
         };
         binding.grdMain.setAdapter(gridAdapter);
 
-
+        //for old grid view
         binding.grdMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -47,9 +51,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //do not delete this is for the options menu buttons
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_drawer,menu);
         return true;
+    }
+    //do not delete this is for the options menu buttons
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_create: startActivity(new Intent(MainActivity.this,createCollection.class));
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }
