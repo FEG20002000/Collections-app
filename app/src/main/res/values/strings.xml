@@ -2,4 +2,8 @@
     <string name="app_name">IQ Collections</string>
     <string name="delete">Delete</string>
     <string name="create">Create</string>
+    <string name="default_web_client">1083821277313-n454vb1penhi0itlle188635689tm6rh.apps.googleusercontent.com</string>
+    <string name="navi_open">Open navigation drawer</string>
+    <string name="navi_close">Close navigation drawer</string>
+
 </resources>

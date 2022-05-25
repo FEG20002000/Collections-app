@@ -8,19 +8,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.navigation.NavigationView;
 import com.iqcollections.databinding.ActivityMainBinding;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ActivityMainBinding binding;
     private GoogleSignInOptions gsi;
     private GoogleSignInClient gsc;
+
+    // drawer menu variables
+    DrawerLayout dl;
+    NavigationView nv;
+    Toolbar tb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // hooks
+        dl = findViewById(R.id.mainlayout);
+        nv = findViewById(R.id.nav_view);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dl, R.string.navi_open, R.string.navi_close);
+        dl.addDrawerListener(toggle);
+        toggle.syncState();
+        nv.bringToFront();
+        nv.setNavigationItemSelectedListener(this);
 
 
 
@@ -67,5 +87,35 @@ public class MainActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(dl.isDrawerOpen(GravityCompat.START)){
+            dl.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_main:
+                break;
+            case R.id.nav_fav:
+                Intent intent = new Intent(MainActivity.this, favourite.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_wish:
+                intent = new Intent(MainActivity.this, wishlist.class);
+                startActivity(intent);
+                break;
+
+        }
+        dl.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

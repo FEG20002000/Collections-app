@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainlayout"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity"
-    app:layoutDescription="@xml/mainact_nav_scnene">
+    app:layoutDescription="@xml/mainact_nav_scnene"
+    app:layout_constraintEnd_toEndOf="parent"
+    tools:context=".MainActivity">
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:importantForAccessibility="auto"
         android:fitsSystemWindows="true"
+        android:importantForAccessibility="auto"
         app:headerLayout="@layout/navheader"
         app:menu="@menu/nav_menu" />
+
     <GridView
         android:id="@+id/grdMain"
         android:layout_width="381dp"
@@ -30,5 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.286" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

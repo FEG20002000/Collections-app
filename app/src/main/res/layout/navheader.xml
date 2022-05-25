@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/header_scene">
+    android:layout_height="200dp"
+    android:background="@drawable/bg"
+    app:layoutDescription="@xml/header_scene"
+    android:gravity="bottom">
+
 
     <ImageView
         android:id="@+id/img_logo"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="135dp"
-        android:layout_weight="1"
         app:srcCompat="@drawable/logo" />
 </LinearLayout>
