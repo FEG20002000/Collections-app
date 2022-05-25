@@ -1,5 +1,6 @@
 package com.iqcollections;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -64,7 +65,10 @@ public class LoginTabFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                            startActivity(new Intent(getActivity(),MainActivity.class));
+                                Context context = view.getContext();
+                                Intent intent = new Intent(context, createCollection.class);
+                                startActivity(intent);
+                                //startActivity(new Intent(getActivity(),MainActivity.class));
                             }else
                             {
                                 Toast.makeText(getActivity(), "error could not sign in", Toast.LENGTH_SHORT).show();

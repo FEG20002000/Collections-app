@@ -46,7 +46,7 @@
                 android:layout_height="30dp" />
 
             <EditText
-                android:id="@+id/edtname"
+                android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -68,7 +68,7 @@
                 android:layout_height="30dp" />
 
             <Button
-                android:id="@+id/SelectImg"
+                android:id="@+id/selectImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
