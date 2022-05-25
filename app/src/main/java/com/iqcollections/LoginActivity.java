@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
    private EditText edtLoginUser,edtLoginPassword,edtRegisterEmail,edtRegisterUser,edtRegisterPass1,edtRegisterPass2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Initialize Firebase Auth
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 });
     }
 public void toaster(String message){
-    //Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
 
 
