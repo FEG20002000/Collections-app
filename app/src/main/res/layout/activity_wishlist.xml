@@ -44,13 +44,22 @@
                 <Space
                     android:layout_width="30dp"
                     android:layout_height="15dp"/>
-
-                <ListView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/lstWish"/>
+                    android:layout_height="match_parent">
+                    <ListView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/wishlistView"
+                        android:padding="10dp"/>
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
         <Space

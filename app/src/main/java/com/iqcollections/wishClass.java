@@ -1,14 +1,17 @@
 package com.iqcollections;
 
-public class Wish {
-    String wishName;
-    String wishDesc;
-    String imgWishUrl;
+public class wishClass {
+    private String wishName;
+    private String wishDesc;
 
-    public Wish(String wishName, String wishDesc, String imgWishUrl) {
+    public wishClass(){
+
+    }
+
+    public wishClass(String wishName, String wishDesc ){
         this.wishName = wishName;
         this.wishDesc = wishDesc;
-        this.imgWishUrl = imgWishUrl;
+
     }
 
     public String getWishName() {
@@ -25,13 +28,5 @@ public class Wish {
 
     public void setWishDesc(String wishDesc) {
         this.wishDesc = wishDesc;
-    }
-
-    public String getImgWishUrl() {
-        return imgWishUrl;
-    }
-
-    public void setImgWishUrl(String imgWishUrl) {
-        this.imgWishUrl = imgWishUrl;
     }
 }

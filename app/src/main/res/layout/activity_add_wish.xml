@@ -52,29 +52,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:hint="Please enter wishlist name" />
+                    android:hint="Please enter the wishlist item" />
 
                 <Space
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
 
-                <ImageView
-                    android:id="@+id/imgWish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_launcher_background" />
-
                 <Space
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
-
-                <Button
-                    android:id="@+id/btnSelectWishImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Select Image" />
 
                 <Space
                     android:layout_width="30dp"
@@ -97,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Add" />
+                    android:text="Create!" />
                 <Space
                     android:layout_width="15dp"
                     android:layout_height="15dp" />
