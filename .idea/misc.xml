@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/drawable/splashscreen_bg.xml" value="0.196" />
+        <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_add_wish.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_collections_display.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_create_collection.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_create_item.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_favourite.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/layout/activity_introductory.xml" value="0.358695652173913" />
@@ -23,6 +25,7 @@
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/menu/nav_items.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/menu/nav_logout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/menu/nav_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ABC/AndroidStudioProjects/IQ-Collections/app/src/main/res/menu/nav_wish.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/alipy/AndroidStudioProjects/IQCollections/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1785" />
         <entry key="..\:/Users/alipy/AndroidStudioProjects/IQCollections/app/src/main/res/drawable/button_bg.xml" value="0.107" />
         <entry key="..\:/Users/alipy/AndroidStudioProjects/IQCollections/app/src/main/res/drawable/edit_text_bg.xml" value="0.107" />

@@ -106,11 +106,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_main:
                 break;
             case R.id.nav_fav:
-                Intent intent = new Intent(MainActivity.this, favourite.class);
+                Intent intent = new Intent(this, favourite.class);
                 startActivity(intent);
                 break;
             case R.id.nav_wish:
-                intent = new Intent(MainActivity.this, wishlist.class);
+                intent = new Intent(this, wishlist.class);
                 startActivity(intent);
                 break;
 
