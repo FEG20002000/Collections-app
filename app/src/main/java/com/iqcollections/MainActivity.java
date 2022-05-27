@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActivityMainBinding binding;
     private GoogleSignInOptions gsi;
     private GoogleSignInClient gsc;
-
+    public String currentCollection;
     // drawer menu variables
     DrawerLayout dl;
     NavigationView nv;
@@ -117,5 +117,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         dl.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public String getCurrentCollection() {
+        return currentCollection;
+    }
+
+    public void setCurrentCollection(String currentCollection) {
+        this.currentCollection = currentCollection;
     }
 }
