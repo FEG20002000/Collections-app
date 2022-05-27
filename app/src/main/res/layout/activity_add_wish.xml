@@ -87,6 +87,17 @@
                 <Space
                     android:layout_width="15dp"
                     android:layout_height="15dp" />
+                <Button
+                    android:id="@+id/btnShowWish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="View Wishlist!" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>

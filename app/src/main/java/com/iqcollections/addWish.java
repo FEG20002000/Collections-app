@@ -1,5 +1,6 @@
 package com.iqcollections;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,7 @@ public class addWish extends AppCompatActivity {
     private FirebaseUser uid;
     private FirebaseAuth mAuth;
     private Button btnAdd ;
-
+    private Button btnShowWish;
 
     private DatabaseReference wishlistDbRef;
 
@@ -33,6 +34,7 @@ public class addWish extends AppCompatActivity {
         etName = findViewById(R.id.wishName);
         etDesc = findViewById(R.id.wishDesc);
         btnAdd = findViewById(R.id.btnAddWish);
+        btnShowWish = findViewById(R.id.btnShowWish);
 
         //Creating the wishlist table
         wishlistDbRef = FirebaseDatabase.getInstance().getReference("Wishlist");
@@ -42,6 +44,13 @@ public class addWish extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addWislistData();
+            }
+        });
+
+        btnShowWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(addWish.this, wishlist.class));
             }
         });
 
