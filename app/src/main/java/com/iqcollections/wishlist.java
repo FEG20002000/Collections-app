@@ -43,7 +43,7 @@ public class wishlist extends AppCompatActivity {
                 list.clear();
                 for (DataSnapshot wishSnapshot : snapshot.getChildren()){
                     wishClass wList = wishSnapshot.getValue(wishClass.class);
-                    String txt = wList.getWishName() + " \n " + wList.getWishDesc();
+                    String txt = "Wish Item: " + wList.getWishName() + " \nWish Description: " + wList.getWishDesc();
                     list.add(txt);
                 }
                 adapter.notifyDataSetChanged();
