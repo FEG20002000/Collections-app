@@ -82,12 +82,6 @@ public class createItem extends AppCompatActivity {
         }
     });
 
-
-
-
-
-
-
     }
     private void insertItemData() {
 

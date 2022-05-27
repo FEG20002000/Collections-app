@@ -11,6 +11,8 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,14 +24,14 @@ import java.util.ArrayList;
 public class wishlist extends AppCompatActivity {
 
     private ListView wishlistView;
-
+    private FirebaseUser uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
 
         wishlistView = findViewById(R.id.wishlistView);
-
+        uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
         ArrayList<String> list = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter<String>(wishlist.this, R.layout.wishlist_item, list);
         wishlistView.setAdapter(adapter);
@@ -42,7 +44,7 @@ public class wishlist extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot wishSnapshot : snapshot.getChildren()){
-                    wishClass wList = wishSnapshot.getValue(wishClass.class);
+                    wishClass wList = wishSnapshot.child(uid.getUid()).getValue(wishClass.class);
                     String txt = "Wish Item: " + wList.getWishName() + " \nWish Description: " + wList.getWishDesc();
                     list.add(txt);
                 }

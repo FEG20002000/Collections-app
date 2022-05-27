@@ -61,7 +61,7 @@ public class addWish extends AppCompatActivity {
         String desc = etDesc.getText().toString();
 
         wishClass wishClass = new wishClass(name, desc);
-        wishlistDbRef.push().setValue(wishClass);
+        wishlistDbRef.child(uid.getUid()).push().setValue(wishClass);
 
         Toast.makeText(addWish.this, "Data inserted!", Toast.LENGTH_SHORT).show();
     }
