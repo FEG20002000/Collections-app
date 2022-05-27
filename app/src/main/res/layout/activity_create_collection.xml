@@ -92,6 +92,17 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
 
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtGoal"
+                android:inputType="number"
+                android:hint="Enter a goal"/>
+
             <Button
                 android:id="@+id/btnCreateColl"
                 android:layout_width="wrap_content"

@@ -4,11 +4,16 @@ public class Collections {
     String colName;
     String colDescription;
     String colImgUrl;
+    String colGoal;
 
-    public Collections(String colName, String colDescription,String colImgUrl) {
+
+
+    public Collections(String colName, String colDescription, String colImgUrl,String colGoal) {
         this.colName = colName;
         this.colDescription = colDescription;
         this.colImgUrl = colImgUrl;
+        this.colGoal = colGoal;
+
     }
 
     public String getColName() {
@@ -33,5 +38,13 @@ public class Collections {
 
     public void setColImgUrl(String colImgUrl) {
         this.colImgUrl = colImgUrl;
+    }
+
+    public String getColGoal() {
+        return colGoal;
+    }
+
+    public void setColGoal(String colGoal) {
+        this.colGoal = colGoal;
     }
 }

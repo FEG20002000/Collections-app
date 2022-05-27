@@ -29,7 +29,7 @@ import com.google.firebase.storage.UploadTask;
 public class createCollection extends AppCompatActivity {
     private Button createCollection, imgSelection;
     private FirebaseAuth mAuth;
-    private EditText name, description;
+    private EditText name, description,goal;
     private ImageView imgDisplay;
     private FirebaseUser uid;
     private DatabaseReference collectionDbRef;
@@ -48,7 +48,7 @@ public class createCollection extends AppCompatActivity {
         imgDisplay = findViewById(R.id.imgCollectionHold);
         imgSelection = findViewById(R.id.selectImg);
         createCollection = findViewById(R.id.btnCreateColl);
-
+        goal = findViewById(R.id.edtGoal);
 
         collectionDbRef = FirebaseDatabase.getInstance().getReference().child("Collections");//setting the collection name
         uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
@@ -80,8 +80,9 @@ public class createCollection extends AppCompatActivity {
 
         String colName = name.getText().toString();
         String colDescription = description.getText().toString();
+        String colGoal = goal.getText().toString();
 
-        Collections collections = new Collections(colName, colDescription,modelUri);
+        Collections collections = new Collections(colName, colDescription,modelUri,colGoal);
         collectionDbRef.child(uid.getUid()).push().setValue(collections);
     }
 
