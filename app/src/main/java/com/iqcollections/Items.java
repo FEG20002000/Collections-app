@@ -4,15 +4,17 @@ public class Items {
     private String itemName;
     private String itemDescription;
     private String itemImage;
+    private String itemDate;
     private String itemCollection;
 
 
 
-    public  Items(String itemName,String itemDescription,String itemImage,String itemCollection){
+    public  Items(String itemName,String itemDescription,String itemImage,String itemCollection,String itemDate){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemImage = itemImage;
         this.itemCollection = itemCollection;
+        this.itemDate = itemDate;
 
     }
 
@@ -46,5 +48,13 @@ public class Items {
 
     public void setItemCollection(String itemCollection) {
         this.itemCollection = itemCollection;
+    }
+
+    public String getItemDate() {
+        return itemDate;
+    }
+
+    public void setItemDate(String itemDate) {
+        this.itemDate = itemDate;
     }
 }
