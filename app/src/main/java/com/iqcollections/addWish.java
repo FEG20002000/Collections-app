@@ -30,30 +30,35 @@ public class addWish extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_wish);
 
-        mAuth = FirebaseAuth.getInstance();
-        etName = findViewById(R.id.wishName);
-        etDesc = findViewById(R.id.wishDesc);
-        btnAdd = findViewById(R.id.btnAddWish);
-        btnShowWish = findViewById(R.id.btnShowWish);
+        try {
 
-        //Creating the wishlist table
-        wishlistDbRef = FirebaseDatabase.getInstance().getReference("Wishlist");
-        uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addWislistData();
-            }
-        });
+            mAuth = FirebaseAuth.getInstance();
+            etName = findViewById(R.id.wishName);
+            etDesc = findViewById(R.id.wishDesc);
+            btnAdd = findViewById(R.id.btnAddWish);
+            btnShowWish = findViewById(R.id.btnShowWish);
 
-        btnShowWish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(addWish.this, wishlist.class));
-            }
-        });
+            //Creating the wishlist table
+            wishlistDbRef = FirebaseDatabase.getInstance().getReference("Wishlist");
+            uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
 
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addWislistData();
+                }
+            });
+
+            btnShowWish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(addWish.this, wishlist.class));
+                }
+            });
+        }catch (Exception e){
+            Toast.makeText(this, "An error has occured"+e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private  void addWislistData(){

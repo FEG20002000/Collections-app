@@ -41,7 +41,7 @@ public class createCollection extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_collection);
-
+try {
         mAuth = FirebaseAuth.getInstance();
         name = findViewById(R.id.edtName);
         description = findViewById(R.id.edtDesc);
@@ -66,14 +66,27 @@ public class createCollection extends AppCompatActivity {
         createCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadImage(imgURI);//uploads image then runs insert data with in it
+                String  colName = name.getText().toString();
+                String colDescription = description.getText().toString();
+                String colGoal = goal.getText().toString();
 
-                Context context = view.getContext();
-                Intent intent = new Intent(context, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(createCollection.this, "Collection successfully created", Toast.LENGTH_SHORT).show();
-            }
+
+                if(colDescription.isEmpty()&&colName.isEmpty()&&colGoal.isEmpty()){
+                    Toast.makeText(createCollection.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                }else{
+                    uploadImage(imgURI);//uploads image then runs insert data with in it
+
+                    Context context = view.getContext();
+                    Intent intent = new Intent(context, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(createCollection.this, "Collection successfully created", Toast.LENGTH_SHORT).show();
+                }
+                }
         });
+}catch (Exception e){
+    Toast.makeText(this, "An error has occured"+e.toString(), Toast.LENGTH_SHORT).show();
+}
+
     }
     private void insertCollectionData() {
 
