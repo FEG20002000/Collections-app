@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Porsche"
+                android:id="@+id/txtitemname"
                 />
             <Space
                 android:layout_width="15dp"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Porsche is a german car company"
+                android:id="@+id/txtitemDescrip"
                 />
             <Space
                 android:layout_width="15dp"
@@ -56,6 +56,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="169dp"
+                android:id="@+id/imgitemView"
                 android:src="@drawable/ic_launcher_background" />
             <Space
                 android:layout_width="15dp"
@@ -64,7 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Date of Creation is: 25/05/2022"/>
+                android:id="@+id/txtitemDate"
+                />
             <Space
                 android:layout_width="15dp"
                 android:layout_height="15dp" />
