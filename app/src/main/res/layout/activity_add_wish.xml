@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/acme"
                     android:text="Add Item to Wishlist"
                     android:textColor="@color/black"
                     android:textFontWeight="3"
@@ -52,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/amaranth"
                     android:hint="Please enter the wishlist item" />
 
                 <Space
@@ -71,6 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/amaranth"
                     android:hint="Please enter a description" />
 
 
@@ -83,15 +86,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/carter_one"
                     android:text="Create!" />
                 <Space
                     android:layout_width="15dp"
                     android:layout_height="15dp" />
+
                 <Button
                     android:id="@+id/btnShowWish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/carter_one"
                     android:text="View Wishlist!" />
 
                 <Space

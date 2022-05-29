@@ -42,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/acme"
                     android:text="Create an item!"
                     android:textColor="@color/black"
                     android:textFontWeight="3"
@@ -56,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/amaranth"
                     android:hint="Please enter an item name" />
 
                 <Space
@@ -78,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/carter_one"
                     android:text="Select Image" />
 
                 <Space
@@ -89,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/amaranth"
                     android:hint="Please enter a description" />
 
                 <DatePicker

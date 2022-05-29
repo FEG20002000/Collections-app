@@ -38,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/acme"
                 android:text="Create a Collection!"
                 android:textColor="@color/black"
                 android:textFontWeight="3"
@@ -52,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/amaranth"
                 android:hint="Please enter the collection name" />
 
             <Space
@@ -74,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/carter_one"
                 android:text="Select Image" />
 
             <Space
@@ -85,6 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/amaranth"
                 android:hint="Please enter a description" />
 
 
@@ -97,17 +101,19 @@
                 android:layout_height="30dp" />
 
             <EditText
+                android:id="@+id/edtGoal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtGoal"
-                android:inputType="number"
-                android:hint="Enter a goal"/>
+                android:fontFamily="@font/amaranth"
+                android:hint="Enter a goal"
+                android:inputType="number" />
 
             <Button
                 android:id="@+id/btnCreateColl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/carter_one"
                 android:text="Create!" />
             <Space
                 android:layout_width="15dp"

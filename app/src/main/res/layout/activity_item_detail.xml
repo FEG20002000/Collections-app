@@ -24,12 +24,15 @@
             <Space
                 android:layout_width="15dp"
                 android:layout_height="15dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/acme"
+                android:text="ITEM VIEW:"
+                android:textAlignment="center"
                 android:textColor="@color/black"
-                android:text="ITEMVIEW:"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
             <Space
                 android:layout_width="15dp"
                 android:layout_height="15dp" />
