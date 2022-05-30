@@ -35,12 +35,12 @@ public class listItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_item);
         uid = FirebaseAuth.getInstance().getCurrentUser();
-        dbref = FirebaseDatabase.getInstance().getReference("Items");
+        dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
         listview = (ListView) findViewById(R.id.lstItemsview);
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayList);
         listview.setAdapter(adapter);
 
-        dbref.child(uid.getUid()).addChildEventListener(new ChildEventListener() {
+        dbref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String value = snapshot.getValue(Items.class).toString();
