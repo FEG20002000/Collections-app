@@ -10,6 +10,7 @@ public class itemDetail extends AppCompatActivity {
 
     private TextView name,description,date;
     private ImageView imgItem;
+    private String selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,9 @@ public class itemDetail extends AppCompatActivity {
         description = findViewById(R.id.txtitemDescrip);
         date = findViewById(R.id.txtitemDate);
         imgItem = findViewById(R.id.imgitemView);
+        listItem lstIt = new listItem();
+        selectedItem = lstIt.getSelectedItem();
+
         try{
 
 

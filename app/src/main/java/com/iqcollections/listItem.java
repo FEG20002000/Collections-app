@@ -29,7 +29,7 @@ public class listItem extends AppCompatActivity {
     private ArrayList<String> arrayList = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
     private FirebaseUser uid;
-    private String selectedItem;
+    private static String  selectedItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
