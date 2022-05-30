@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,49 +26,58 @@ public class wishlist extends AppCompatActivity {
 
     private ListView wishlistView;
     private FirebaseUser uid;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
+        try {
 
-        wishlistView = findViewById(R.id.wishlistView);
-        uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
-        ArrayList<String> list = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter<String>(wishlist.this, R.layout.wishlist_item, list);
-        wishlistView.setAdapter(adapter);
+            mAuth = FirebaseAuth.getInstance();
+            wishlistView = findViewById(R.id.wishlistView);
+            uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Wishlist");
+            ArrayList<String> list = new ArrayList<>();
+            ArrayAdapter adapter = new ArrayAdapter<String>(wishlist.this, R.layout.wishlist_item, list);
+            wishlistView.setAdapter(adapter);
 
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Wishlist");
 
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot wishSnapshot : snapshot.getChildren()){
-                    wishClass wList = wishSnapshot.child(uid.getUid()).getValue(wishClass.class);
-                    String txt = "Wish Item: " + wList.getWishName() + " \nWish Description: " + wList.getWishDesc();
-                    list.add(txt);
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot wishSnapshot : snapshot.getChildren()) {
+                        wishClass wList = wishSnapshot.child(uid.getUid()).getValue(wishClass.class);
+                        String txt = "Wish Item: " + wList.getWishName() + " \nWish Description: " + wList.getWishDesc();
+                        list.add(txt);
+                    }
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, "An error has occurred" + e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.nav_wish,menu);
+        inflater.inflate(R.menu.nav_wish, menu);
         return true;
     }
+
     //do not delete this is for the options menu buttons
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_addwish: startActivity(new Intent(wishlist.this, addWish.class));
+        switch (item.getItemId()) {
+            case R.id.nav_addwish:
+                startActivity(new Intent(wishlist.this, addWish.class));
         }
 
         return super.onOptionsItemSelected(item);
