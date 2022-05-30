@@ -72,7 +72,7 @@ public class listItem extends AppCompatActivity {
       listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            setSelectedItem(arrayList.get(i));
+            setSelectedItem(arrayList.get(i).substring(0));
             startActivity(new Intent(listItem.this,itemDetail.class));
           }
       });
