@@ -36,7 +36,7 @@ public class wishlist extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter<String>(wishlist.this, R.layout.wishlist_item, list);
         wishlistView.setAdapter(adapter);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Wishlist");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());
 
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -44,7 +44,7 @@ public class wishlist extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot wishSnapshot : snapshot.getChildren()){
-                    wishClass wList = wishSnapshot.child(uid.getUid()).getValue(wishClass.class);
+                    wishClass wList = wishSnapshot.getValue(wishClass.class);
                     String txt = "Wish Item: " + wList.getWishName() + " \nWish Description: " + wList.getWishDesc();
                     list.add(txt);
                 }
