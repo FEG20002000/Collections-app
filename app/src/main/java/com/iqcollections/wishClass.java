@@ -4,11 +4,11 @@ public class wishClass {
     private String wishName;
     private String wishDesc;
 
-    public wishClass(){
+    public wishClass() {
 
     }
 
-    public wishClass(String wishName, String wishDesc ){
+    public wishClass(String wishName, String wishDesc) {
         this.wishName = wishName;
         this.wishDesc = wishDesc;
 
