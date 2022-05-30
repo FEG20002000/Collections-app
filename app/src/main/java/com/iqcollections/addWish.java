@@ -1,5 +1,6 @@
 package com.iqcollections;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -44,8 +45,18 @@ public class addWish extends AppCompatActivity {
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    String name = etName.getText().toString();
+                    String desc = etDesc.getText().toString();
+                    if (name.isEmpty() && desc.isEmpty()) {
+                        Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                    } else {
+                        addWishlistData();
 
-                        addWislistData();
+                        Context context = view.getContext();
+                        Intent intent = new Intent(context, wishlist.class);
+                        startActivity(intent);
+                        Toast.makeText(addWish.this, "Data inserted!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -61,7 +72,7 @@ public class addWish extends AppCompatActivity {
 
     }
 
-    private void addWislistData() {
+    private void addWishlistData() {
         String name = etName.getText().toString();
         String desc = etDesc.getText().toString();
         if (name.isEmpty() && desc.isEmpty()) {
@@ -70,8 +81,6 @@ public class addWish extends AppCompatActivity {
 
             wishClass wishClass = new wishClass(name, desc);
             wishlistDbRef.child(uid.getUid()).push().setValue(wishClass);
-
-            Toast.makeText(addWish.this, "Data inserted!", Toast.LENGTH_SHORT).show();
         }
     }
 
