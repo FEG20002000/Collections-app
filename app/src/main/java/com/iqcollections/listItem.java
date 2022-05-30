@@ -5,7 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,6 +29,7 @@ public class listItem extends AppCompatActivity {
     private ArrayList<String> arrayList = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
     private FirebaseUser uid;
+    private String selectedItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +69,21 @@ public class listItem extends AppCompatActivity {
             }
         });
 
+      listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            setSelectedItem(arrayList.get(i));
+            startActivity(new Intent(listItem.this,itemDetail.class));
+          }
+      });
 
+    }
 
+    public String getSelectedItem() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(String selectedItem) {
+        this.selectedItem = selectedItem;
     }
 }
