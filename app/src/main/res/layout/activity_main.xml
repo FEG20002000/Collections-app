@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainlayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/background"
     app:layoutDescription="@xml/mainact_nav_scnene"
     app:layout_constraintEnd_toEndOf="parent"
     tools:context=".MainActivity">
@@ -20,18 +20,14 @@
         android:importantForAccessibility="auto"
         app:headerLayout="@layout/navheader"
         app:menu="@menu/nav_menu" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:layout_height="match_parent"
+    android:id="@+id/rvMain"/>
 
-    <GridView
-        android:id="@+id/grdMain"
-        android:layout_width="381dp"
-        android:layout_height="518dp"
-        android:numColumns="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
-
-
+</LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

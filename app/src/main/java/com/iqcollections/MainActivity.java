@@ -5,28 +5,49 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
-import com.iqcollections.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    ActivityMainBinding binding;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MainActivity extends AppCompatActivity implements rvCollections,NavigationView.OnNavigationItemSelectedListener {
+
     private GoogleSignInOptions gsi;
     private GoogleSignInClient gsc;
-    public String currentCollection;
+    private DatabaseReference db;
+    private DatabaseReference dr;
+    private FirebaseStorage fs;
+    private RecyclerView rv;
+    private FirebaseUser uid;
+    private List<readCollections> lstCollections;
+    colAdapter adapter;
+    static String currentCollection;
     // drawer menu variables
     DrawerLayout dl;
     NavigationView nv;
@@ -36,10 +57,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         //binding for gridview
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        //Firebase
+
+        fs = FirebaseStorage.getInstance();
+        uid = FirebaseAuth.getInstance().getCurrentUser();
+
+         db = FirebaseDatabase.getInstance().getReference("Collections").child(uid.getUid());
+
+        rv =findViewById(R.id.rvMain);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager((this)));
+        lstCollections = new ArrayList<>();
+        adapter = new colAdapter(MainActivity.this,lstCollections);
+        rv.setAdapter(adapter);
+
+
 
         // hooks
         dl = findViewById(R.id.mainlayout);
@@ -51,24 +86,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nv.bringToFront();
         nv.setNavigationItemSelectedListener(this);
 
-
-        //adding name of collection pull from Database to griveiw
-        String[] collectionName = {"Car", "IT", "PC"};
-        //adding images to an array must pull from database to grid view
-        int[] collectionIMg = {R.drawable.background, R.drawable.background, R.drawable.background};
-
-        grid_adapter gridAdapter = new grid_adapter(MainActivity.this, collectionName, collectionIMg) {
-        };
-        binding.grdMain.setAdapter(gridAdapter);
-
-        //for old grid view
-        binding.grdMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        db.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                Toast.makeText(MainActivity.this, "You Clicked on " + collectionName[position], Toast.LENGTH_SHORT).show();
+
+
+                    readCollections collections = snapshot.getValue(readCollections.class);
+                    lstCollections.add(collections);
+
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
+
+
+
     }
 
     //do not delete this is for the options menu buttons
@@ -125,5 +179,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setCurrentCollection(String currentCollection) {
         this.currentCollection = currentCollection;
+    }
+
+    @Override
+    public void onItemClick() {
+
     }
 }
