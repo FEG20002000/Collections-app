@@ -1,5 +1,6 @@
 package com.iqcollections;
 
+// this class stores all the constructors as well as the get and set methods for the wishlist function
 public class wishClass {
     private String wishName;
     private String wishDesc;

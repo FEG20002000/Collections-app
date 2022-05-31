@@ -52,11 +52,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nv.setNavigationItemSelectedListener(this);
 
 
-
         //adding name of collection pull from Database to griveiw
-        String[] collectionName = {"Car","IT","PC"};
-       //adding images to an array must pull from database to grid view
-        int[] collectionIMg = {R.drawable.background,R.drawable.background,R.drawable.background};
+        String[] collectionName = {"Car", "IT", "PC"};
+        //adding images to an array must pull from database to grid view
+        int[] collectionIMg = {R.drawable.background, R.drawable.background, R.drawable.background};
 
         grid_adapter gridAdapter = new grid_adapter(MainActivity.this, collectionName, collectionIMg) {
         };
@@ -67,22 +66,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(MainActivity.this,"You Clicked on "+ collectionName[position],Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "You Clicked on " + collectionName[position], Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     //do not delete this is for the options menu buttons
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_drawer,menu);
+        inflater.inflate(R.menu.main_drawer, menu);
         return true;
     }
+
     //do not delete this is for the options menu buttons
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_create: startActivity(new Intent(MainActivity.this,createCollection.class));
+        switch (item.getItemId()) {
+            case R.id.nav_create:
+                startActivity(new Intent(MainActivity.this, createCollection.class));
         }
 
 
@@ -91,10 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if(dl.isDrawerOpen(GravityCompat.START)){
+        if (dl.isDrawerOpen(GravityCompat.START)) {
             dl.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
 
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_main:
                 break;
             case R.id.nav_fav:

@@ -30,6 +30,7 @@ public class addWish extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_wish);
+        // Using a try catch for error handling
         try {
 
             mAuth = FirebaseAuth.getInstance();
@@ -38,7 +39,7 @@ public class addWish extends AppCompatActivity {
             btnAdd = findViewById(R.id.btnAddWish);
             btnShowWish = findViewById(R.id.btnShowWish);
 
-            //Creating the wishlist table
+            //Creating the wishlist table in the firebase
             wishlistDbRef = FirebaseDatabase.getInstance().getReference().child("Wishlist");
             uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
 
@@ -47,11 +48,12 @@ public class addWish extends AppCompatActivity {
                 public void onClick(View view) {
                     String name = etName.getText().toString();
                     String desc = etDesc.getText().toString();
+                    // using if statement to ensure that the user does not insert empty data
                     if (name.isEmpty() && desc.isEmpty()) {
                         Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         addWishlistData();
-
+                        // return to the wishlist activity
                         Context context = view.getContext();
                         Intent intent = new Intent(context, wishlist.class);
                         startActivity(intent);
@@ -75,6 +77,7 @@ public class addWish extends AppCompatActivity {
     private void addWishlistData() {
         String name = etName.getText().toString();
         String desc = etDesc.getText().toString();
+        // using if statement to ensure that the user does not insert empty data
         if (name.isEmpty() && desc.isEmpty()) {
             Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
         } else {
@@ -83,6 +86,5 @@ public class addWish extends AppCompatActivity {
             wishlistDbRef.child(uid.getUid()).push().setValue(wishClass);
         }
     }
-
 
 }

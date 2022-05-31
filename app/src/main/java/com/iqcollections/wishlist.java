@@ -32,19 +32,19 @@ public class wishlist extends AppCompatActivity {
 
         wishlistView = findViewById(R.id.wishlistView);
         uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();//Using an arraylist to store the data from firebase
         ArrayAdapter adapter = new ArrayAdapter<String>(wishlist.this, R.layout.wishlist_item, list);
         wishlistView.setAdapter(adapter);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());
-
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());// database reference to call the data
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
+                list.clear();// clear the list
+                // using a DataSnapshot that contains data from the database location to read the data in the database
                 for (DataSnapshot wishSnapshot : snapshot.getChildren()){
-                    wishClass wList = wishSnapshot.getValue(wishClass.class);
+                    wishClass wList = wishSnapshot.getValue(wishClass.class);// getting the value from the wishClass class
                     String txt = "Wish Item: " + wList.getWishName() + " \nWish Description: " + wList.getWishDesc();
                     list.add(txt);
                 }
@@ -57,7 +57,7 @@ public class wishlist extends AppCompatActivity {
             }
         });
     }
-
+    // calling the nav menu
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.nav_wish,menu);
