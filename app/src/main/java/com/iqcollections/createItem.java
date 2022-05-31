@@ -91,10 +91,10 @@ public class createItem extends AppCompatActivity {
         String itemDate = dtitemDate.toString();
         MainActivity mainActivity = new MainActivity();
 
-        String itemCollection = mainActivity.getCurrentCollection();
+        String itemCollection = mainActivity.getCurrentCollection();//getting collection name
 
         Items items = new Items(itemName, itemDescription,modelUri,itemCollection,itemDate);
-        itemDbReference.child(uid.getUid()).push().setValue(items);
+        itemDbReference.child(uid.getUid()).push().setValue(items);//setting the items values
     }
 
     public  void uploadImage(Uri imgURI){//to get image to own storage for user

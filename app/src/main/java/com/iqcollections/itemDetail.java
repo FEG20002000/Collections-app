@@ -28,7 +28,7 @@ public class itemDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
-
+    //setting the objects
         name = findViewById(R.id.txtitemname);
         description = findViewById(R.id.txtitemDescrip);
         date = findViewById(R.id.txtitemDate);
@@ -36,18 +36,20 @@ public class itemDetail extends AppCompatActivity {
         listItem lstIt = new listItem();
         selectedItem = lstIt.getSelectedItem();
         uid = FirebaseAuth.getInstance().getCurrentUser();
-        Query checkitem = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid()).orderByChild("itemName").equalTo(selectedItem);
+        Query checkitem = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid()).orderByChild("itemName").equalTo(selectedItem);//query for data
 
         try{
-            checkitem.addListenerForSingleValueEvent(new ValueEventListener() {
+            checkitem.addListenerForSingleValueEvent(new ValueEventListener() {//running the specific data
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
+                        //getting the items values
                         String desc = snapshot.child(selectedItem).child("itemDescription").getValue(String.class);
                         String itemDate = snapshot.child(selectedItem).child("itemDate").getValue(String.class);
                         String itemName = snapshot.child(selectedItem).child("itemName").getValue(String.class);
                         String itemImage = snapshot.child(selectedItem).child("itemImage").getValue(String.class);
 
+                        //setting objects to items
                         name.setText(itemName);
                         description.setText(desc);
                         date.setText("Date: "+itemDate);
