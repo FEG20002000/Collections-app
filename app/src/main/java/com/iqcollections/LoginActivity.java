@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 task.getResult(ApiException.class);
                 navFromGoogle();
             } catch (ApiException e) {
-                Toast.makeText(this, "An error has occured"+e.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "An error has occurred"+e.toString(), Toast.LENGTH_SHORT).show();
             }
 
         }

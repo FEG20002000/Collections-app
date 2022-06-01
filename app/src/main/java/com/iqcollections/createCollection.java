@@ -71,7 +71,7 @@ public class createCollection extends AppCompatActivity {
                     String colGoal = goal.getText().toString();
 
 
-                    if (colDescription.isEmpty() && colName.isEmpty() && colGoal.isEmpty()) {
+                    if (colDescription.isEmpty() || colName.isEmpty() || colGoal.isEmpty()) {
                         Toast.makeText(createCollection.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         uploadImage(imgURI);//uploads image then runs insert data with in it
@@ -101,6 +101,7 @@ public class createCollection extends AppCompatActivity {
     }
 
     public void uploadImage(Uri imgURI) {//to get image to own storage for user
+
         if (imgURI != null) {
             StorageReference fileRef = storageReference.child(uid.getUid()).child(System.currentTimeMillis() + "." + getFileExtension(imgURI));
             fileRef.putFile(imgURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -110,7 +111,8 @@ public class createCollection extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             modelUri = uri.toString();
-                            insertCollectionData();//has to run here or bugs out for what ever reason
+
+                                insertCollectionData();//has to run here or bugs out for what ever reason
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -122,10 +124,11 @@ public class createCollection extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
+                    Toast.makeText(createCollection.this, "Error" + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
+
 
     }
 
@@ -141,8 +144,11 @@ public class createCollection extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
             imgURI = data.getData();
-            imgDisplay.setImageURI(imgURI);//setting image data
-
+            if (imgURI == null) {
+                Toast.makeText(createCollection.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+            } else {
+                imgDisplay.setImageURI(imgURI);//setting image data
+            }
         }
 
 

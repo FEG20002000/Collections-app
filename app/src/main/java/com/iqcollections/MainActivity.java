@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -30,7 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,9 +154,11 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_main:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_fav:
-                Intent intent = new Intent(this, favourite.class);
+                intent = new Intent(this, favourite.class);
                 startActivity(intent);
                 break;
             case R.id.nav_wish:

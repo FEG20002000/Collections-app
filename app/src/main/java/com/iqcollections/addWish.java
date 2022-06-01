@@ -49,7 +49,7 @@ public class addWish extends AppCompatActivity {
                     String name = etName.getText().toString();
                     String desc = etDesc.getText().toString();
                     // using if statement to ensure that the user does not insert empty data
-                    if (name.isEmpty() && desc.isEmpty()) {
+                    if (name.isEmpty() || desc.isEmpty()) {
                         Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         addWishlistData();
@@ -78,7 +78,7 @@ public class addWish extends AppCompatActivity {
         String name = etName.getText().toString();
         String desc = etDesc.getText().toString();
         // using if statement to ensure that the user does not insert empty data
-        if (name.isEmpty() && desc.isEmpty()) {
+        if (name.isEmpty() || desc.isEmpty()) {
             Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
         } else {
 
