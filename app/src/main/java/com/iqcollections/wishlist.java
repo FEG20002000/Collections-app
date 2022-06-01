@@ -45,7 +45,9 @@ public class wishlist extends AppCompatActivity {
                 // using a DataSnapshot that contains data from the database location to read the data in the database
                 for (DataSnapshot wishSnapshot : snapshot.getChildren()){
                     wishClass wList = wishSnapshot.getValue(wishClass.class);// getting the value from the wishClass class
-                    String txt = "Wish Item: " + wList.getWishName() + " \nWish Description: " + wList.getWishDesc();
+                    String txt = "Wish Item: " + wList.getWishName() +
+                            " \nWish Description: " + wList.getWishDesc() +
+                            " \nExpected Price: R" + wList.getWishPrice();
                     list.add(txt);
                 }
                 adapter.notifyDataSetChanged();

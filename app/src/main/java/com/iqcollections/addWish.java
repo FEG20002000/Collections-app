@@ -19,6 +19,7 @@ public class addWish extends AppCompatActivity {
 
     private EditText etName;
     private EditText etDesc;
+    private EditText etPrice;
     private FirebaseUser uid;
     private FirebaseAuth mAuth;
     private Button btnAdd;
@@ -36,6 +37,7 @@ public class addWish extends AppCompatActivity {
             mAuth = FirebaseAuth.getInstance();
             etName = findViewById(R.id.wishName);
             etDesc = findViewById(R.id.wishDesc);
+            etPrice = findViewById(R.id.wishPrice);
             btnAdd = findViewById(R.id.btnAddWish);
             btnShowWish = findViewById(R.id.btnShowWish);
 
@@ -48,8 +50,10 @@ public class addWish extends AppCompatActivity {
                 public void onClick(View view) {
                     String name = etName.getText().toString();
                     String desc = etDesc.getText().toString();
+                    Double price = Double.parseDouble(etPrice.getText().toString());
+
                     // using if statement to ensure that the user does not insert empty data
-                    if (name.isEmpty() || desc.isEmpty()) {
+                    if (name.isEmpty() || desc.isEmpty() || price == null) {
                         Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         addWishlistData();
@@ -77,12 +81,13 @@ public class addWish extends AppCompatActivity {
     private void addWishlistData() {
         String name = etName.getText().toString();
         String desc = etDesc.getText().toString();
+        Double price = Double.parseDouble(etPrice.getText().toString());
         // using if statement to ensure that the user does not insert empty data
-        if (name.isEmpty() || desc.isEmpty()) {
+        if (name.isEmpty() || desc.isEmpty() || price == null) {
             Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
         } else {
 
-            wishClass wishClass = new wishClass(name, desc);
+            wishClass wishClass = new wishClass(name, desc, price);
             wishlistDbRef.child(uid.getUid()).push().setValue(wishClass);
         }
     }

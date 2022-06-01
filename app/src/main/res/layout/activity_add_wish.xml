@@ -64,10 +64,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
 
-                <Space
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-
                 <EditText
                     android:id="@+id/wishDesc"
                     android:layout_width="match_parent"
@@ -76,6 +72,26 @@
                     android:fontFamily="@font/amaranth"
                     android:hint="Please enter a description" />
 
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <EditText
+                    android:id="@+id/wishPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/amaranth"
+                    android:hint="Please enter the expected price" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
 
                 <Space
                     android:layout_width="30dp"
