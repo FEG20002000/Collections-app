@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,12 +24,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class listItem extends AppCompatActivity {
    private DatabaseReference dbref ;
 
     private ListView listview;
+    private TextView txtCol;
+    private String currentCol;
+    private  String goal;
+    private int precentage;
     private ArrayList<String> arrayList = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
     private FirebaseUser uid;
@@ -39,7 +46,7 @@ public class listItem extends AppCompatActivity {
         setContentView(R.layout.activity_list_item);
         uid = FirebaseAuth.getInstance().getCurrentUser();
         dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
-
+        txtCol = findViewById(R.id.txtItemCollection);
         listview = (ListView) findViewById(R.id.lstItemsview);
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayList);
         listview.setAdapter(adapter);
@@ -73,6 +80,8 @@ public class listItem extends AppCompatActivity {
             }
         });
 
+        String itemscol = "Items avalable for "+currentCol+": Goal progress: "+arrayList.size()+"/"+goal ;
+        txtCol.setText(itemscol);
       listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

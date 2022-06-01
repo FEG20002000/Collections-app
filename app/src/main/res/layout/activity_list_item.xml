@@ -46,6 +46,7 @@
                     android:text="Items Avaliable:"
                     android:textAlignment="center"
                     android:textColor="@color/black"
+                    android:id="@+id/txtItemCollection"
                     android:textStyle="bold" />
                 <Space
                     android:layout_width="30dp"
