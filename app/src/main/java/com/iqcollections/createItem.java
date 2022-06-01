@@ -39,6 +39,7 @@ public class createItem extends AppCompatActivity {
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private Uri imgURI;
     String modelUri;
+    Boolean imgSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class createItem extends AppCompatActivity {
         btnImageSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                imgSelected = true;
                 Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
@@ -74,7 +76,7 @@ public class createItem extends AppCompatActivity {
                 String itemDescription = edtItemDescription.getText().toString();
                 String itemDate = dtitemDate.getDayOfMonth() + " " + dtitemDate.getMonth() + " " + dtitemDate.getYear();
 
-                if(itemName.isEmpty() || itemDescription.isEmpty() || itemDate.isEmpty()){
+                if(itemName.isEmpty() || itemDescription.isEmpty() || itemDate.isEmpty() || imgSelected == false){
                     Toast.makeText(createItem.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else {
                     uploadImage(imgURI);//uploads image then runs insert data with in it

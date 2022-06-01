@@ -36,6 +36,7 @@ public class createCollection extends AppCompatActivity {
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private Uri imgURI;
     String modelUri;
+    Boolean imgSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class createCollection extends AppCompatActivity {
             imgSelection.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    imgSelected = true;
                     Intent galleryIntent = new Intent();
                     galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                     galleryIntent.setType("image/*");
@@ -71,7 +73,7 @@ public class createCollection extends AppCompatActivity {
                     String colGoal = goal.getText().toString();
 
 
-                    if (colDescription.isEmpty() || colName.isEmpty() || colGoal.isEmpty()) {
+                    if (colDescription.isEmpty() || colName.isEmpty() || colGoal.isEmpty() || imgSelected == false) {
                         Toast.makeText(createCollection.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         uploadImage(imgURI);//uploads image then runs insert data with in it
