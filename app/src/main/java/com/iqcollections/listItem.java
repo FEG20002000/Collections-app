@@ -50,7 +50,9 @@ public class listItem extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.lstItemsview);
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayList);
         listview.setAdapter(adapter);
+        Intent intent = getIntent();
 
+        currentCol = intent.getStringExtra("currentcolName");
         dbref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -80,7 +82,7 @@ public class listItem extends AppCompatActivity {
             }
         });
 
-        String itemscol = "Items avalable for "+currentCol+": Goal progress: "+arrayList.size()+"/"+goal ;
+        String itemscol = "Items avalable for  "+currentCol+":  Goal progress: "+arrayList.size()+"/"+goal ;
         txtCol.setText(itemscol);
       listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override

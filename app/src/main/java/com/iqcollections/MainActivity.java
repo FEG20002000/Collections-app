@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
     public void onItemClick(int pos) {
         Intent intent = new Intent(MainActivity.this,listItem.class);
         intent.putExtra("currentcolName",lstCollections.get(pos).getColName());
-
+        //intent.putExtra("colgoal",lstCollections.get(pos).g)
         startActivity(intent);
 
     }

@@ -17,7 +17,7 @@ public class readCollections {
         this.colImgUrl = colImgUrl;
     }
 
-    String colName,colImgUrl;
+    String colName,colImgUrl,colGame;
 
 
 }
