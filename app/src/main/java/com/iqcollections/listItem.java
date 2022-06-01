@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +39,7 @@ public class listItem extends AppCompatActivity {
         setContentView(R.layout.activity_list_item);
         uid = FirebaseAuth.getInstance().getCurrentUser();
         dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
+
         listview = (ListView) findViewById(R.id.lstItemsview);
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayList);
         listview.setAdapter(adapter);
@@ -86,4 +90,26 @@ public class listItem extends AppCompatActivity {
     public void setSelectedItem(String selectedItem) {
         this.selectedItem = selectedItem;
     }
+
+    //do not delete this is for the options menu buttons
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.nav_items, menu);
+        return true;
+    }
+
+    //do not delete this is for the options menu buttons
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_create:
+                startActivity(new Intent(listItem.this, createItem.class));
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
+
+

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager((this)));
         lstCollections = new ArrayList<>();
-        adapter = new colAdapter(MainActivity.this,lstCollections);
+        adapter = new colAdapter(MainActivity.this,lstCollections,this);
         rv.setAdapter(adapter);
 
 
@@ -182,7 +182,11 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
     }
 
     @Override
-    public void onItemClick() {
+    public void onItemClick(int pos) {
+        Intent intent = new Intent(MainActivity.this,listItem.class);
+        intent.putExtra("currentcolName",lstCollections.get(pos).getColName());
+
+        startActivity(intent);
 
     }
 }

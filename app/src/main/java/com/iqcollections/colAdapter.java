@@ -18,16 +18,18 @@ import java.util.List;
 public class colAdapter extends RecyclerView.Adapter<colAdapter.ViewHolder> {
     Context context;
     List<readCollections> lstCollection;
-    public colAdapter(   Context context,List<readCollections> lstCollection){
-this.context = context;
-this.lstCollection = lstCollection;
+    private final rvCollections rvcoll;
+    public colAdapter(   Context context,List<readCollections> lstCollection,rvCollections rvcoll){
+        this.context = context;
+        this.lstCollection = lstCollection;
+        this.rvcoll = rvcoll;
 
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.displaycoll,parent,false);
-        return new ViewHolder(v);
+        return new ViewHolder(v,rvcoll);
     }
 
     @Override
@@ -48,11 +50,21 @@ this.lstCollection = lstCollection;
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgView;
         TextView txtView;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView,rvCollections rvcoll) {
             super(itemView);
         imgView = itemView.findViewById(R.id.imgRecycle);
         txtView = itemView.findViewById(R.id.txtRecycle);
-
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(rvcoll != null){
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        rvcoll.onItemClick(pos);
+                    }
+                }
+            }
+        });
         }
     }
 

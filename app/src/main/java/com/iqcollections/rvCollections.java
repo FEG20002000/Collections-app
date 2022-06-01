@@ -1,7 +1,7 @@
 package com.iqcollections;
 
 public interface rvCollections {
-void onItemClick();
+void onItemClick(int pos);
 
 
 }
