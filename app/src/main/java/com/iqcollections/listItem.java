@@ -38,7 +38,11 @@ public class listItem extends AppCompatActivity {
     private String currentGoal;
     private  String goal;
     private double precentage;
-    private ArrayList<String> arrayList = new ArrayList<>();
+    private ArrayList<String> arrayListName = new ArrayList<>();
+    private ArrayList<String> arrayListDescription= new ArrayList<>();
+    private ArrayList<String> arrayListIMG = new ArrayList<>();
+    private ArrayList<String> arrayListDate = new ArrayList<>();
+
     private ArrayAdapter<String> adapter;
     private FirebaseUser uid;
     private static String  selectedItem;
@@ -52,7 +56,7 @@ public class listItem extends AppCompatActivity {
         txtCol = findViewById(R.id.txtItemCollection);
         listview = (ListView) findViewById(R.id.lstItemsview);
 
-        adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayList);
+        adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayListName);
         listview.setAdapter(adapter);
         Intent intent = getIntent();
 
@@ -66,7 +70,10 @@ public class listItem extends AppCompatActivity {
                 readItems value = snapshot.getValue(readItems.class);
             if(value != null){
                 if(value.getItemCollection().equals(currentCol)){
-                    arrayList.add(value.getItemName());
+                    arrayListName.add(value.getItemName());
+                    arrayListDescription.add(value.getItemDescription());
+                    arrayListDate.add(value.getItemDate());
+                    arrayListIMG.add(value.getItemImage());
                     counter++;
                     precentage = (counter/curgoal)*100;
                     String itemscol = "Items avalable for  "+currentCol+":  Goal progress: "+counter+"/"+currentGoal+"  "+precentage+"%" ;
@@ -104,7 +111,15 @@ public class listItem extends AppCompatActivity {
       listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            startActivity(new Intent(listItem.this,itemDetail.class));
+
+           Intent itemIntent = new Intent(listItem.this,itemDetail.class);
+            itemIntent.putExtra("itemName",arrayListName.get(i));
+            itemIntent.putExtra("itemDescription",arrayListDescription.get(i));
+            itemIntent.putExtra("itemDate",arrayListDate.get(i));
+            itemIntent.putExtra("itemIMG",arrayListIMG.get(i));
+
+            startActivity(itemIntent);
+
           }
       });
 

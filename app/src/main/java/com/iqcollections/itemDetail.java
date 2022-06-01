@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class itemDetail extends AppCompatActivity {
 
@@ -33,36 +35,21 @@ public class itemDetail extends AppCompatActivity {
         description = findViewById(R.id.txtitemDescrip);
         date = findViewById(R.id.txtitemDate);
         imgItem = findViewById(R.id.imgitemView);
-        listItem lstIt = new listItem();
-        selectedItem = lstIt.getSelectedItem();
+
         uid = FirebaseAuth.getInstance().getCurrentUser();
-        Query checkitem = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid()).orderByChild("itemName").equalTo(selectedItem);//query for data
+      try{
+          Intent itemIntent = getIntent();
+          selectedItem = itemIntent.getStringExtra("itemName");
+       String itemDescription = itemIntent.getStringExtra("itemDescription");
+       String itemDate = itemIntent.getStringExtra("itemDate");
+       String itemImg = itemIntent.getStringExtra("itemIMG");
 
-        try{
-            checkitem.addListenerForSingleValueEvent(new ValueEventListener() {//running the specific data
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        //getting the items values
-                        String desc = snapshot.child(selectedItem).child("itemDescription").getValue(String.class);
-                        String itemDate = snapshot.child(selectedItem).child("itemDate").getValue(String.class);
-                        String itemName = snapshot.child(selectedItem).child("itemName").getValue(String.class);
-                        String itemImage = snapshot.child(selectedItem).child("itemImage").getValue(String.class);
+       name.setText("Name: "+selectedItem);
+       description.setText("Description: "+itemDescription);
+       date.setText("Date of Creation: "+itemDate);
+       Picasso.get().load(itemImg).into(imgItem);
 
-                        //setting objects to items
-                        name.setText(itemName);
-                        description.setText(desc);
-                        date.setText("Date: "+itemDate);
-                        imgItem.setImageURI(Uri.parse(itemImage));
-                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
+          ;
 
         }catch (Exception e){
 

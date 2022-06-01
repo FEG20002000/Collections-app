@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ import com.google.type.DateTime;
 public class createItem extends AppCompatActivity {
 
     private EditText edtItemName,edtItemDescription;
-    private View dtitemDate;
+    private DatePicker dtitemDate;
     private Button btnImageSelect,btnCreate;
     private ImageView imgItem;
     private FirebaseAuth mAuth ;
@@ -88,7 +89,7 @@ public class createItem extends AppCompatActivity {
 
         String itemName = edtItemName.getText().toString();
         String itemDescription = edtItemDescription.getText().toString();
-        String itemDate = dtitemDate.toString();
+        String itemDate = dtitemDate.getDayOfMonth()+" "+dtitemDate.getMonth()+" "+dtitemDate.getYear();
         MainActivity mainActivity = new MainActivity();
         Intent intent = getIntent();
         String itemCollection = intent.getStringExtra("colName");//getting collection name
