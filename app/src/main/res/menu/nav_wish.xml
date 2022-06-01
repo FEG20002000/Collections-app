@@ -6,9 +6,6 @@
             android:id="@+id/nav_addwish"
             android:icon="@drawable/add"
             android:title="Add to Wishlist" />
-        <item
-            android:id="@+id/nav_delwish"
-            android:icon="@drawable/del"
-            android:title="Delete From Wishlist" />
+
     </group>
 </menu>
