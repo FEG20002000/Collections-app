@@ -19,10 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignUpTabFragment extends Fragment {
     private Button btnRegister;
     private FirebaseAuth mAuth;
-    private EditText edtLoginUser,edtLoginPassword,edtRegisterEmail,edtRegisterUser,edtRegisterPass1,edtRegisterPass2;
+    private EditText edtLoginUser, edtLoginPassword, edtRegisterEmail, edtRegisterUser, edtRegisterPass1, edtRegisterPass2;
+
     @Override
-    public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState){
-        ViewGroup root = (ViewGroup) inflator.inflate(R.layout.signup_tab_fragment,container, false);
+    public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup root = (ViewGroup) inflator.inflate(R.layout.signup_tab_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         edtRegisterEmail = root.findViewById(R.id.email2);
         edtRegisterUser = root.findViewById(R.id.username);
@@ -51,20 +52,20 @@ public class SignUpTabFragment extends Fragment {
                 LoginActivity lg = new LoginActivity();
                 String userEmail = edtRegisterEmail.getText().toString();
                 String userPass = edtRegisterPass1.getText().toString();
-                String userPasscon =  edtRegisterPass2.getText().toString();
+                String userPasscon = edtRegisterPass2.getText().toString();
 
-                if(userEmail.isEmpty() || userPass.isEmpty() ||(!userPass.equals(userPasscon))){
+                if (userEmail.isEmpty() || userPass.isEmpty() || (!userPass.equals(userPasscon))) {
                     Toast.makeText(getActivity(), "You cannot leave the fields blank/Check if your passwords match", Toast.LENGTH_SHORT).show();
-                }else{
-                    mAuth.createUserWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                } else {
+                    mAuth.createUserWithEmailAndPassword(userEmail, userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Succesfull Sign Up!", Toast.LENGTH_SHORT).show();
 
-                            }else {
-                                Toast.makeText(getActivity(), "An error has occured"+task.getException(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "An error has occured" + task.getException(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -76,26 +77,27 @@ public class SignUpTabFragment extends Fragment {
 
         return root;
     }
-    public void register(){
+
+    public void register() {
         LoginActivity lg = new LoginActivity();
         String userEmail = edtRegisterEmail.getText().toString();
         String userPass = edtRegisterUser.getText().toString();
-        String userPasscon =  edtRegisterPass2.getText().toString();
-        if(userEmail.isEmpty() || userPass.isEmpty() || (!userPass.equals(userPasscon))){
+        String userPasscon = edtRegisterPass2.getText().toString();
+        if (userEmail.isEmpty() || userPass.isEmpty() || (!userPass.equals(userPasscon))) {
 
-        }else{
+        } else {
 
-            mAuth.createUserWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(userEmail, userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
 
 
-                       lg.toaster("You may now sign in");
+                        lg.toaster("You may now sign in");
 
-                    }else {
-                     lg.toaster("An Error has occurred "+ task.getException());
+                    } else {
+                        lg.toaster("An Error has occurred " + task.getException());
                     }
                 }
             });

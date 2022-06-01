@@ -50,10 +50,10 @@ public class addWish extends AppCompatActivity {
                 public void onClick(View view) {
                     String name = etName.getText().toString();
                     String desc = etDesc.getText().toString();
-                    Double price = Double.parseDouble(etPrice.getText().toString());
+                    String price = etPrice.getText().toString();
 
                     // using if statement to ensure that the user does not insert empty data
-                    if (name.isEmpty() || desc.isEmpty() || price == null) {
+                    if (name.isEmpty() || desc.isEmpty() || price.isEmpty()) {
                         Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         addWishlistData();
@@ -61,6 +61,7 @@ public class addWish extends AppCompatActivity {
                         Context context = view.getContext();
                         Intent intent = new Intent(context, wishlist.class);
                         startActivity(intent);
+                        finish();
                         Toast.makeText(addWish.this, "Data inserted!", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -70,6 +71,7 @@ public class addWish extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(addWish.this, wishlist.class));
+                    finish();
                 }
             });
         } catch (Exception e) {
@@ -79,16 +81,22 @@ public class addWish extends AppCompatActivity {
     }
 
     private void addWishlistData() {
-        String name = etName.getText().toString();
-        String desc = etDesc.getText().toString();
-        Double price = Double.parseDouble(etPrice.getText().toString());
-        // using if statement to ensure that the user does not insert empty data
-        if (name.isEmpty() || desc.isEmpty() || price == null) {
-            Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-        } else {
+        try {
+            String name = etName.getText().toString();
 
-            wishClass wishClass = new wishClass(name, desc, price);
-            wishlistDbRef.child(uid.getUid()).push().setValue(wishClass);
+            String desc = etDesc.getText().toString();
+            String price = etPrice.getText().toString();
+
+            // using if statement to ensure that the user does not insert empty data
+            if (name.isEmpty() || desc.isEmpty() || price.isEmpty()) {
+                Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+            } else {
+
+                wishClass wishClass = new wishClass(name, desc, price);
+                wishlistDbRef.child(uid.getUid()).push().setValue(wishClass);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "An error has occurred" + e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -81,6 +81,7 @@ public class createCollection extends AppCompatActivity {
                         Context context = view.getContext();
                         Intent intent = new Intent(context, MainActivity.class);
                         startActivity(intent);
+                        finish();
                         Toast.makeText(createCollection.this, "Collection successfully created", Toast.LENGTH_SHORT).show();
                     }
                 }

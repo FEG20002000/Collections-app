@@ -4,19 +4,22 @@ package com.iqcollections;
 public class wishClass {
     private String wishName;
     private String wishDesc;
-    private Double wishPrice;
+    private String wishPrice;
+
 
     public wishClass() {
 
     }
 
-    public wishClass(String wishName, String wishDesc, Double wishPrice) {
+    public wishClass(String wishName, String wishDesc, String wishPrice) {
         this.wishName = wishName;
         this.wishDesc = wishDesc;
         this.wishPrice = wishPrice;
     }
 
-    public String getWishName() { return wishName; }
+    public String getWishName() {
+        return wishName;
+    }
 
     public void setWishName(String wishName) {
         this.wishName = wishName;
@@ -30,7 +33,13 @@ public class wishClass {
         this.wishDesc = wishDesc;
     }
 
-    public Double getWishPrice() { return wishPrice; }
+    public String getWishPrice() {
+        return wishPrice;
+    }
 
-    public void setWishPrice(Double wishPrice) { this.wishPrice = wishPrice; }
+    public void setWishPrice(String wishPrice) {
+        this.wishPrice = wishPrice;
+    }
+
+
 }

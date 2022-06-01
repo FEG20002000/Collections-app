@@ -84,6 +84,7 @@ public class createItem extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, MainActivity.class);
                     startActivity(intent);
+                    finish();
                     Toast.makeText(createItem.this, "Item successfully created, please reselect collection", Toast.LENGTH_SHORT).show();
 
                 }

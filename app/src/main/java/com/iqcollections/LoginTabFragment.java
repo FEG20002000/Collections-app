@@ -24,11 +24,12 @@ public class LoginTabFragment extends Fragment {
     private EditText email, pass;
     private TextView forgetPass;
     private Button login;
-    private float v=0;
+    private float v = 0;
     private FirebaseAuth mAuth;
+
     @Override
-    public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState){
-        ViewGroup root = (ViewGroup) inflator.inflate(R.layout.login_tab_fragment,container, false);
+    public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup root = (ViewGroup) inflator.inflate(R.layout.login_tab_fragment, container, false);
 
         email = root.findViewById(R.id.email);
         pass = root.findViewById(R.id.pass);
@@ -56,22 +57,22 @@ public class LoginTabFragment extends Fragment {
             public void onClick(View view) {
                 String userEmail = email.getText().toString();
                 String userPass = pass.getText().toString();
-                if(userEmail.isEmpty() || userPass.isEmpty()){
+                if (userEmail.isEmpty() || userPass.isEmpty()) {
 
 
-                }else{
-                    mAuth.signInWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                } else {
+                    mAuth.signInWithEmailAndPassword(userEmail, userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Context context = view.getContext();
-                                Toast.makeText(context, "Succesfully Logged in", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Successfully Logged in", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(context, MainActivity.class);
                                 startActivity(intent);
 
-                            }else
-                            {
-                                Toast.makeText(getContext(), "An Error has occured, check your username and passsword!", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getContext(), "An Error has occurred, check your username and password!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

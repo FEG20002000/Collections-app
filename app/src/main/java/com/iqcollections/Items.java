@@ -8,8 +8,7 @@ public class Items {
     private String itemCollection;
 
 
-
-    public  Items(String itemName,String itemDescription,String itemImage,String itemCollection,String itemDate){
+    public Items(String itemName, String itemDescription, String itemImage, String itemCollection, String itemDate) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemImage = itemImage;

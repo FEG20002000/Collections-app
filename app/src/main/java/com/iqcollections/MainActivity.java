@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements rvCollections,NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements rvCollections, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleSignInOptions gsi;
     private GoogleSignInClient gsc;
@@ -61,15 +61,14 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
         fs = FirebaseStorage.getInstance();
         uid = FirebaseAuth.getInstance().getCurrentUser();
 
-         db = FirebaseDatabase.getInstance().getReference("Collections").child(uid.getUid());
+        db = FirebaseDatabase.getInstance().getReference("Collections").child(uid.getUid());
 
-        rv =findViewById(R.id.rvMain);
+        rv = findViewById(R.id.rvMain);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager((this)));
         lstCollections = new ArrayList<>();
-        adapter = new colAdapter(MainActivity.this,lstCollections,this);
+        adapter = new colAdapter(MainActivity.this, lstCollections, this);
         rv.setAdapter(adapter);
-
 
 
         // hooks
@@ -87,9 +86,8 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
 
-
-                    readCollections collections = snapshot.getValue(readCollections.class);
-                    lstCollections.add(collections);
+                readCollections collections = snapshot.getValue(readCollections.class);
+                lstCollections.add(collections);
 
 
                 adapter.notifyDataSetChanged();
@@ -117,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
         });
 
 
-
-
     }
 
     //do not delete this is for the options menu buttons
@@ -134,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
         switch (item.getItemId()) {
             case R.id.nav_create:
                 startActivity(new Intent(MainActivity.this, createCollection.class));
+                finish();
         }
 
 
@@ -156,14 +153,12 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
             case R.id.nav_main:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.nav_fav:
-                intent = new Intent(this, favourite.class);
-                startActivity(intent);
+                finish();
                 break;
             case R.id.nav_wish:
                 intent = new Intent(this, wishlist.class);
                 startActivity(intent);
+                finish();
                 break;
 
         }
@@ -181,10 +176,11 @@ public class MainActivity extends AppCompatActivity implements rvCollections,Nav
 
     @Override
     public void onItemClick(int pos) {
-        Intent intent = new Intent(MainActivity.this,listItem.class);
-        intent.putExtra("currentcolName",lstCollections.get(pos).getColName());
-        intent.putExtra("colgoal",lstCollections.get(pos).getColGoal());
+        Intent intent = new Intent(MainActivity.this, listItem.class);
+        intent.putExtra("currentcolName", lstCollections.get(pos).getColName());
+        intent.putExtra("colgoal", lstCollections.get(pos).getColGoal());
         startActivity(intent);
+        finish();
 
     }
 }

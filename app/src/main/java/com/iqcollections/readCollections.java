@@ -1,6 +1,17 @@
 package com.iqcollections;
 
 public class readCollections {
+
+    String colName, colImgUrl, colGoal;
+
+    public String getColGoal() {
+        return colGoal;
+    }
+
+    public void setColGoal(String colGoal) {
+        this.colGoal = colGoal;
+    }
+
     public String getColName() {
         return colName;
     }
@@ -15,15 +26,5 @@ public class readCollections {
 
     public void setColImgUrl(String colImgUrl) {
         this.colImgUrl = colImgUrl;
-    }
-
-    String colName,colImgUrl,colGoal;
-
-    public String getColGoal() {
-        return colGoal;
-    }
-
-    public void setColGoal(String colGoal) {
-        this.colGoal = colGoal;
     }
 }

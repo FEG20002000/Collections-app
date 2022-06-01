@@ -1,10 +1,10 @@
 package com.iqcollections;
 
 public class readItems {
-     String itemName;
-     String itemDescription;
-     String itemImage;
-     String itemDate;
+    String itemName;
+    String itemDescription;
+    String itemImage;
+    String itemDate;
     String itemCollection;
 
     public String getItemName() {

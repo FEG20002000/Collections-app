@@ -25,6 +25,7 @@ public class wishlist extends AppCompatActivity {
 
     private ListView wishlistView;
     private FirebaseUser uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class wishlist extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();// clear the list
                 // using a DataSnapshot that contains data from the database location to read the data in the database
-                for (DataSnapshot wishSnapshot : snapshot.getChildren()){
+                for (DataSnapshot wishSnapshot : snapshot.getChildren()) {
                     wishClass wList = wishSnapshot.getValue(wishClass.class);// getting the value from the wishClass class
                     String txt = "Wish Item: " + wList.getWishName() +
                             " \nWish Description: " + wList.getWishDesc() +
@@ -59,17 +60,22 @@ public class wishlist extends AppCompatActivity {
             }
         });
     }
+
     // calling the nav menu
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.nav_wish,menu);
+        inflater.inflate(R.menu.nav_wish, menu);
         return true;
     }
+
     //do not delete this is for the options menu buttons
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_addwish: startActivity(new Intent(wishlist.this, addWish.class));
+        switch (item.getItemId()) {
+            case R.id.nav_addwish:
+                startActivity(new Intent(wishlist.this, addWish.class));
+                finish();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
