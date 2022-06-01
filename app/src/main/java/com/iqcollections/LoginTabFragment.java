@@ -65,12 +65,13 @@ public class LoginTabFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 Context context = view.getContext();
+                                Toast.makeText(context, "Succesfully Logged in", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(context, MainActivity.class);
                                 startActivity(intent);
-                                //startActivity(new Intent(getActivity(),MainActivity.class));
+
                             }else
                             {
-
+                                Toast.makeText(getContext(), "An Error has occured, check your username and passsword!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
