@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,12 +35,14 @@ public class listItem extends AppCompatActivity {
     private ListView listview;
     private TextView txtCol;
     private String currentCol;
+    private String currentGoal;
     private  String goal;
-    private int precentage;
-    private ArrayList<String> arrayList = new ArrayList<String>();
+    private double precentage;
+    private ArrayList<String> arrayList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private FirebaseUser uid;
     private static String  selectedItem;
+    private int counter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,17 +51,31 @@ public class listItem extends AppCompatActivity {
         dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
         txtCol = findViewById(R.id.txtItemCollection);
         listview = (ListView) findViewById(R.id.lstItemsview);
+
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayList);
         listview.setAdapter(adapter);
         Intent intent = getIntent();
 
         currentCol = intent.getStringExtra("currentcolName");
+        currentGoal = intent.getStringExtra("colgoal");
+        counter=0;
+        double curgoal = Double.parseDouble(currentGoal);
         dbref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String value = snapshot.getValue(Items.class).toString();
-                arrayList.add(value);
-                adapter.notifyDataSetChanged();
+                readItems value = snapshot.getValue(readItems.class);
+            if(value != null){
+                if(value.getItemCollection().equals(currentCol)){
+                    arrayList.add(value.getItemName());
+                    counter++;
+                    precentage = (counter/curgoal)*100;
+                    String itemscol = "Items avalable for  "+currentCol+":  Goal progress: "+counter+"/"+currentGoal+"  "+precentage+"%" ;
+                    txtCol.setText(itemscol);
+                }
+
+
+                adapter.notifyDataSetChanged();}
+
             }
 
             @Override
@@ -82,12 +99,11 @@ public class listItem extends AppCompatActivity {
             }
         });
 
-        String itemscol = "Items avalable for  "+currentCol+":  Goal progress: "+arrayList.size()+"/"+goal ;
-        txtCol.setText(itemscol);
+
+
       listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            setSelectedItem(arrayList.get(i).substring(0));
             startActivity(new Intent(listItem.this,itemDetail.class));
           }
       });
@@ -114,7 +130,11 @@ public class listItem extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_create:
-                startActivity(new Intent(listItem.this, createItem.class));
+                Intent intent = new Intent(listItem.this, createItem.class);
+
+                intent.putExtra("colName",currentCol);
+
+                startActivity(intent);
         }
 
 

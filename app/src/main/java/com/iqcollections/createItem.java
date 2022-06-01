@@ -74,9 +74,9 @@ public class createItem extends AppCompatActivity {
             uploadImage(imgURI);//uploads image then runs insert data with in it
 
             Context context = view.getContext();
-            Intent intent = new Intent(context, listItem.class);
+            Intent intent = new Intent(context, MainActivity.class);
             startActivity(intent);
-            Toast.makeText(createItem.this, "Collection successfully created", Toast.LENGTH_SHORT).show();
+            Toast.makeText(createItem.this, "Item successfully created, please reselect collection", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -90,8 +90,8 @@ public class createItem extends AppCompatActivity {
         String itemDescription = edtItemDescription.getText().toString();
         String itemDate = dtitemDate.toString();
         MainActivity mainActivity = new MainActivity();
-
-        String itemCollection = mainActivity.getCurrentCollection();//getting collection name
+        Intent intent = getIntent();
+        String itemCollection = intent.getStringExtra("colName");//getting collection name
 
         Items items = new Items(itemName, itemDescription,modelUri,itemCollection,itemDate);
         itemDbReference.child(uid.getUid()).push().setValue(items);//setting the items values

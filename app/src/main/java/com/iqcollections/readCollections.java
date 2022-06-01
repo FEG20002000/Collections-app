@@ -17,7 +17,13 @@ public class readCollections {
         this.colImgUrl = colImgUrl;
     }
 
-    String colName,colImgUrl,colGame;
+    String colName,colImgUrl,colGoal;
 
+    public String getColGoal() {
+        return colGoal;
+    }
 
+    public void setColGoal(String colGoal) {
+        this.colGoal = colGoal;
+    }
 }
