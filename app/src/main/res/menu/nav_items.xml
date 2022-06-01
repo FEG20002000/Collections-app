@@ -5,9 +5,5 @@
             android:id="@+id/nav_create"
             android:icon="@android:drawable/ic_menu_add"
             android:title="Create Item" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@android:drawable/btn_star_big_on"
-            android:title="Delete Item" />
     </group>
 </menu>
