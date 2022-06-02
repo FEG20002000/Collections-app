@@ -77,4 +77,11 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Back"
+        android:id="@+id/btnBack"/>
+
 </LinearLayout>
