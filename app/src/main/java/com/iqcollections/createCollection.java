@@ -1,17 +1,27 @@
 package com.iqcollections;
 /*
-    Code Attribution :
+    Code Attribution 1:
     Source: YouTube
     URL link: https://www.youtube.com/watch?v=3YDOVD7n21E
     Title Page/Video: How to save user data into Firebase Realtime database using android studio.
     Author name/tag/channel: Be Codey
     Author channel/profile url link: https://www.youtube.com/c/BeCodey
  */
+
+/*
+    Code Attribution 2:
+    Source: YouTube
+    URL link: https://youtu.be/9JdbgoYgCyA
+    Title Page/Video: Store Firebase Realtime Database in Android Studio 2021 | Firebase Android CRUD Operation
+    Author name/tag/channel: Cambo Tutorial
+    Author channel/profile url link: https://m.youtube.com/c/CamboTutorial
+*/
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -21,10 +31,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +47,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class createCollection extends AppCompatActivity {
+public class createCollection extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Button createCollection, imgSelection;
     private FirebaseAuth mAuth;
     private EditText name, description, goal;
@@ -44,6 +58,8 @@ public class createCollection extends AppCompatActivity {
     private Uri imgURI;
     String modelUri;
     Boolean imgSelected = false;
+    DrawerLayout dl;
+    NavigationView nv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +73,15 @@ public class createCollection extends AppCompatActivity {
             imgSelection = findViewById(R.id.selectImg);
             createCollection = findViewById(R.id.btnCreateColl);
             goal = findViewById(R.id.edtGoal);
+
+            dl = findViewById(R.id.createColLayout);
+            nv = findViewById(R.id.nav_view);
+
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dl, R.string.navi_open, R.string.navi_close);
+            dl.addDrawerListener(toggle);
+            toggle.syncState();
+            nv.bringToFront();
+            nv.setNavigationItemSelectedListener(this);
 
             collectionDbRef = FirebaseDatabase.getInstance().getReference().child("Collections");//setting the collection name
             uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
@@ -160,7 +185,32 @@ public class createCollection extends AppCompatActivity {
                 imgDisplay.setImageURI(imgURI);//setting image data
             }
         }
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_main:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
 
+                break;
+            case R.id.nav_wish:
+                intent = new Intent(this, wishlist.class);
+                startActivity(intent);
+
+                break;
+            case R.id.nav_member:
+                intent = new Intent(this, groupMembers.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_about:
+                intent = new Intent(this, aboutDisplay.class);
+                startActivity(intent);
+                break;
+
+        }
+        dl.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

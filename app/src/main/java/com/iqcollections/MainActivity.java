@@ -35,6 +35,14 @@ package com.iqcollections;
     Author channel/profile url link: https://www.youtube.com/c/CodingWithTea
  */
 
+/*
+    Code Attribution 5:
+    Source: YouTube
+    URL link: https://youtu.be/9JdbgoYgCyA
+    Title Page/Video: Store Firebase Realtime Database in Android Studio 2021 | Firebase Android CRUD Operation
+    Author name/tag/channel: Cambo Tutorial
+    Author channel/profile url link: https://m.youtube.com/c/CamboTutorial
+*/
 
 import android.content.Intent;
 import android.os.Bundle;
