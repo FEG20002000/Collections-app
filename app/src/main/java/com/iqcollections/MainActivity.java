@@ -196,6 +196,14 @@ public class MainActivity extends AppCompatActivity implements rvCollections, Na
                 startActivity(intent);
 
                 break;
+            case R.id.nav_member:
+                intent = new Intent(this, groupMembers.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_about:
+                intent = new Intent(this, aboutDisplay.class);
+                startActivity(intent);
+                break;
 
         }
         dl.closeDrawer(GravityCompat.START);
