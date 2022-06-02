@@ -26,6 +26,15 @@ package com.iqcollections;
     Author channel/profile url link: https://www.youtube.com/c/PracticalCoding
  */
 
+/*
+    Code Attribution :
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=ayKMfVt2Sg4
+    Title Page/Video: Android Login Screen | Login Android Studio | Android Studio
+    Author name/tag/channel: Coding With Tea
+    Author channel/profile url link: https://www.youtube.com/c/CodingWithTea
+ */
+
 
 import android.content.Intent;
 import android.os.Bundle;
