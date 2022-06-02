@@ -2,6 +2,8 @@ package com.iqcollections;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ public class itemDetail extends AppCompatActivity {
     private ImageView imgItem;
     private String selectedItem;
     private FirebaseUser uid;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class itemDetail extends AppCompatActivity {
         description = findViewById(R.id.txtitemDescrip);
         date = findViewById(R.id.txtitemDate);
         imgItem = findViewById(R.id.imgitemView);
+    btnBack = findViewById(R.id.btnBack);
 
         uid = FirebaseAuth.getInstance().getCurrentUser();
         try {
@@ -42,7 +46,12 @@ public class itemDetail extends AppCompatActivity {
             date.setText("Date of Creation: " + itemDate);
             Picasso.get().load(itemImg).into(imgItem);
 
-            ;
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(itemDetail.this,MainActivity.class));
+                }
+            });
 
         } catch (Exception e) {
             Toast.makeText(this, "An error has occurred" + e.toString(), Toast.LENGTH_SHORT).show();
