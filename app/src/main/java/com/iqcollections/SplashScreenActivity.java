@@ -1,6 +1,6 @@
 package com.iqcollections;
 /*
-    Code Attribution
+    Code Attribution 1:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=1dnM0-D5CDo&t=1s
     Title Page/Video: How to create Splash Screen in Android Studio | Java

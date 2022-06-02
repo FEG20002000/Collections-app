@@ -1,6 +1,6 @@
 package com.iqcollections;
 /*
-    Code Attribution
+    Code Attribution 1:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=lt6xbth-yQo&list=PL5jb9EteFAOD8dlG1Il3fCiaVNPD_P7gh&index=3&t=13s
     Title Page/Video: Android Navigation Drawer Menu Material Design | Android studio tutorial | Part 3
