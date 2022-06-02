@@ -8,6 +8,25 @@ package com.iqcollections;
     Author channel/profile url link: https://www.youtube.com/c/CodingWithTea
  */
 
+/*
+    Code Attribution :
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=eGWu0-0TWFI&t=969s
+    Title Page/Video: How to Retrieve data from Firebase Database in Android Studio Retrieve data from Firebase in Android
+    Author name/tag/channel: Coding With Tea
+    Author channel/profile url link: https://www.youtube.com/c/CodingWithTea
+ */
+
+/*
+    Code Attribution :
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=7GPUpvcU1FE
+    Title Page/Video: RecyclerView Item Click | Best Practice Way
+    Author name/tag/channel: Practical Coding
+    Author channel/profile url link: https://www.youtube.com/c/PracticalCoding
+ */
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;

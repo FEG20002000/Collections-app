@@ -1,5 +1,12 @@
 package com.iqcollections;
-
+/*
+    Code Attribution :
+    Source: YouTube
+    URL link: https://www.youtube.com/watch?v=3YDOVD7n21E
+    Title Page/Video: How to save user data into Firebase Realtime database using android studio.
+    Author name/tag/channel: Be Codey
+    Author channel/profile url link: https://www.youtube.com/c/BeCodey
+ */
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;

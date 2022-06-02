@@ -1,5 +1,12 @@
 package com.iqcollections;
-
+/*
+    Code Attribution :
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=tbh9YaWPKKs
+    Title Page/Video: Login & Register Android App Using Firebase | Android Studio Authentication Tutorials | Part 1/4
+    Author name/tag/channel: SmallAcademy
+    Author channel/profile url link: https://www.youtube.com/c/SmallAcademy
+ */
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
