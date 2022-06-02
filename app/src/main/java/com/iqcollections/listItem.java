@@ -115,7 +115,7 @@ public class listItem extends AppCompatActivity {
             itemIntent.putExtra("itemIMG",arrayListIMG.get(i));
 
             startActivity(itemIntent);
-            finish();
+
 
           }
       });

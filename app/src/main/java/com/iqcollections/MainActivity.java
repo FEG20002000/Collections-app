@@ -153,12 +153,12 @@ public class MainActivity extends AppCompatActivity implements rvCollections, Na
             case R.id.nav_main:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                finish();
+
                 break;
             case R.id.nav_wish:
                 intent = new Intent(this, wishlist.class);
                 startActivity(intent);
-                finish();
+
                 break;
 
         }
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements rvCollections, Na
         intent.putExtra("currentcolName", lstCollections.get(pos).getColName());
         intent.putExtra("colgoal", lstCollections.get(pos).getColGoal());
         startActivity(intent);
-        finish();
+
 
     }
 }

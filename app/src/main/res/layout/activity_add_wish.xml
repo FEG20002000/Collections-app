@@ -87,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/amaranth"
-                    android:hint="Please enter the expected price" />
+                    android:hint="Please enter the expected price"
+                    android:inputType="number" />
 
                 <Space
                     android:layout_width="30dp"
