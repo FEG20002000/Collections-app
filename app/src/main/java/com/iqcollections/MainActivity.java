@@ -1,4 +1,12 @@
 package com.iqcollections;
+/*
+    Code Attribution
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=lt6xbth-yQo&list=PL5jb9EteFAOD8dlG1Il3fCiaVNPD_P7gh&index=3&t=13s
+    Title Page/Video: Android Navigation Drawer Menu Material Design | Android studio tutorial | Part 3
+    Author name/tag/channel: Coding With Tea
+    Author channel/profile url link: https://www.youtube.com/c/CodingWithTea
+ */
 
 import android.content.Intent;
 import android.os.Bundle;

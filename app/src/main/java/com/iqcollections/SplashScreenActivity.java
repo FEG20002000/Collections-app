@@ -1,4 +1,12 @@
 package com.iqcollections;
+/*
+    Code Attribution
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=1dnM0-D5CDo&t=1s
+    Title Page/Video: How to create Splash Screen in Android Studio | Java
+    Author name/tag/channel: Android Mate
+    Author channel/profile url link: https://www.youtube.com/channel/UC3w_uEn4IhvT14rfP5nTl0A
+ */
 
 import android.content.Intent;
 import android.os.Bundle;

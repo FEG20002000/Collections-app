@@ -1,5 +1,14 @@
 package com.iqcollections;
 
+/*
+    Code Attribution
+    Source: YouTube
+    URL link: https://youtu.be/9JdbgoYgCyA?list=PLHQRWugvckFr9H2Mo4hyre1wQHglSRake
+    Title Page/Video: How to Insert Data in Firebase Realtime Database | Android Firebase Part 3
+    Author name/tag/channel: CodingZest
+    Author channel/profile url link: https://www.youtube.com/c/CodingZest
+ */
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

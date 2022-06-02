@@ -1,5 +1,14 @@
 package com.iqcollections;
 
+/*
+    Code Attribution
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=XactTKR0Wfc
+    Title Page/Video: Firebase Android Tutorial 5 - Retrieving Data from Firebase Realtime Database
+    Author name/tag/channel: ProgrammingKnowledge
+    Author channel/profile url link: https://www.youtube.com/c/ProgrammingKnowledge
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
