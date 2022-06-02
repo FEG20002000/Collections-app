@@ -9,7 +9,7 @@ package com.iqcollections;
  */
 
 /*
-    Code Attribution :
+    Code Attribution 2:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=eGWu0-0TWFI&t=969s
     Title Page/Video: How to Retrieve data from Firebase Database in Android Studio Retrieve data from Firebase in Android
@@ -18,7 +18,7 @@ package com.iqcollections;
  */
 
 /*
-    Code Attribution :
+    Code Attribution 3:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=7GPUpvcU1FE
     Title Page/Video: RecyclerView Item Click | Best Practice Way
@@ -27,7 +27,7 @@ package com.iqcollections;
  */
 
 /*
-    Code Attribution :
+    Code Attribution 4:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=ayKMfVt2Sg4
     Title Page/Video: Android Login Screen | Login Android Studio | Android Studio

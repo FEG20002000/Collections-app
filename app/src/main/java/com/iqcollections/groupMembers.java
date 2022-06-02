@@ -1,5 +1,14 @@
 package com.iqcollections;
 
+/*
+    Code Attribution 1:
+    Source: YouTube
+    Source URL link: https://www.youtube.com/watch?v=x0X19LJJGjc
+    Title Page/Video: [Android Studio] TableLayout - Border & Collapse
+    Author name/tag/channel: Coding with Sara
+    Author channel/profile url link: https://www.youtube.com/c/Codingwithsara
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
