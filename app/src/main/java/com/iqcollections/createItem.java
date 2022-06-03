@@ -60,7 +60,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_item);
 
-
+//setting objects
         edtItemDescription = findViewById(R.id.edtitemDesc);
         edtItemName = findViewById(R.id.edtItemname);
         dtitemDate = findViewById(R.id.dtpItemDate);
@@ -75,7 +75,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
         dl.addDrawerListener(toggle);
         toggle.syncState();
         nv.bringToFront();
-        nv.setNavigationItemSelectedListener(this);
+        nv.setNavigationItemSelectedListener(this);//setting navigation items
 
         itemDbReference = FirebaseDatabase.getInstance().getReference().child("Items");//setting the collection name
         uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
@@ -97,7 +97,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
 
                 String itemName = edtItemName.getText().toString();
                 String itemDescription = edtItemDescription.getText().toString();
-                String itemDate = dtitemDate.getDayOfMonth() + " " + dtitemDate.getMonth() + " " + dtitemDate.getYear();
+                String itemDate = dtitemDate.getDayOfMonth() + " " + dtitemDate.getMonth() + " " + dtitemDate.getYear();//storing the item information
 
                 if(itemName.isEmpty() || itemDescription.isEmpty() || itemDate.isEmpty() || imgSelected == false){
                     Toast.makeText(createItem.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
@@ -107,7 +107,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
                     Context context = view.getContext();
                     Intent intent = new Intent(context, MainActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish();//sending to next screem
                     Toast.makeText(createItem.this, "Item successfully created, please reselect collection", Toast.LENGTH_SHORT).show();
 
                 }
@@ -140,7 +140,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
                         @Override
                         public void onSuccess(Uri uri) {
                             modelUri = uri.toString();
-                            insertItemData();//has to run here or bugs out for what ever reason
+                            insertItemData();//running method
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

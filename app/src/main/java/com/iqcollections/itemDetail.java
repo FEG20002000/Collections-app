@@ -47,7 +47,7 @@ public class itemDetail extends AppCompatActivity {
             String itemDescription = itemIntent.getStringExtra("itemDescription");
             String itemDate = itemIntent.getStringExtra("itemDate");
             String itemImg = itemIntent.getStringExtra("itemIMG");
-
+        //getting information from last page from intent and placing them in objects
             name.setText("Name: " + selectedItem);
             description.setText("Description: " + itemDescription);
             date.setText("Date of Creation: " + itemDate);

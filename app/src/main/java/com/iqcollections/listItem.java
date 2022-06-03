@@ -61,16 +61,17 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setting objects
         setContentView(R.layout.activity_list_item);
         uid = FirebaseAuth.getInstance().getCurrentUser();
         dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
         txtCol = findViewById(R.id.txtItemCollection);
         listview = (ListView) findViewById(R.id.lstItemsview);
-
+//setting list view adapter
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayListName);
         listview.setAdapter(adapter);
         Intent intent = getIntent();
-
+    //getting collection information from last page
         currentCol = intent.getStringExtra("currentcolName");
         currentGoal = intent.getStringExtra("colgoal");
         counter=0;
@@ -84,12 +85,12 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
         nv.bringToFront();
         nv.setNavigationItemSelectedListener(this);
-
+        //getting list items
         dbref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 readItems value = snapshot.getValue(readItems.class);
-            if(value != null){
+            if(value != null){//setting list and goal information
                 if(value.getItemCollection().equals(currentCol)){
                     arrayListName.add(value.getItemName());
                     arrayListDescription.add(value.getItemDescription());
