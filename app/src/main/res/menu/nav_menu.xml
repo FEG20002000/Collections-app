@@ -14,6 +14,17 @@
 
 
     </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_member"
+            android:title="Group Members"
+            android:icon="@drawable/grp"/>
+        <item
+            android:id="@+id/nav_about"
+            android:title="About"
+            android:icon="@drawable/abt"/>
+
+    </group>
 
 
 </menu>

@@ -9,7 +9,7 @@ package com.iqcollections;
  */
 
 /*
-    Code Attribution :
+    Code Attribution 2:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=eGWu0-0TWFI&t=969s
     Title Page/Video: How to Retrieve data from Firebase Database in Android Studio Retrieve data from Firebase in Android
@@ -18,7 +18,7 @@ package com.iqcollections;
  */
 
 /*
-    Code Attribution :
+    Code Attribution 3:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=7GPUpvcU1FE
     Title Page/Video: RecyclerView Item Click | Best Practice Way
@@ -27,7 +27,7 @@ package com.iqcollections;
  */
 
 /*
-    Code Attribution :
+    Code Attribution 4:
     Source: YouTube
     Source URL link: https://www.youtube.com/watch?v=ayKMfVt2Sg4
     Title Page/Video: Android Login Screen | Login Android Studio | Android Studio
@@ -35,6 +35,14 @@ package com.iqcollections;
     Author channel/profile url link: https://www.youtube.com/c/CodingWithTea
  */
 
+/*
+    Code Attribution 5:
+    Source: YouTube
+    URL link: https://youtu.be/9JdbgoYgCyA
+    Title Page/Video: Store Firebase Realtime Database in Android Studio 2021 | Firebase Android CRUD Operation
+    Author name/tag/channel: Cambo Tutorial
+    Author channel/profile url link: https://m.youtube.com/c/CamboTutorial
+*/
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -195,6 +203,14 @@ public class MainActivity extends AppCompatActivity implements rvCollections, Na
                 intent = new Intent(this, wishlist.class);
                 startActivity(intent);
 
+                break;
+            case R.id.nav_member:
+                intent = new Intent(this, groupMembers.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_about:
+                intent = new Intent(this, aboutDisplay.class);
+                startActivity(intent);
                 break;
 
         }
