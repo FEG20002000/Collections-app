@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
     private FirebaseUser uid;
     private static String  selectedItem;
     private int counter;
+    private ProgressBar goalProgess;
 
     DrawerLayout dl;
     NavigationView nv;
@@ -67,6 +69,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
         dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
         txtCol = findViewById(R.id.txtItemCollection);
         listview = (ListView) findViewById(R.id.lstItemsview);
+        goalProgess = findViewById(R.id.goalProg);
 //setting list view adapter
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayListName);
         listview.setAdapter(adapter);
@@ -99,6 +102,10 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
                     counter++;
                     precentage = (counter/curgoal)*100;
                     String itemscol = "Items avalable for  "+currentCol+":  Goal progress: "+counter+"/"+currentGoal+"  "+precentage+"%" ;
+                    goalProgess.setMax(Integer.parseInt(currentGoal));
+                    goalProgess.setProgress(counter);
+                    goalProgess.refreshDrawableState();
+
                     txtCol.setText(itemscol);
                 }
 
