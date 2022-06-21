@@ -11,4 +11,5 @@
     <color name="purple_extra">#ba53de</color>
     <color name="pink_extra">#f469a9</color>
     <color name="blue_extra">#88befe</color>
+    <color name="red_delete">#C61A1A</color>
 </resources>

@@ -45,6 +45,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
     private String currentGoal;
     private  String goal;
     private double precentage;
+    private ArrayList<String> arrayListId = new ArrayList<>();
     private ArrayList<String> arrayListName = new ArrayList<>();
     private ArrayList<String> arrayListDescription= new ArrayList<>();
     private ArrayList<String> arrayListIMG = new ArrayList<>();
@@ -91,6 +92,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
                 readItems value = snapshot.getValue(readItems.class);
             if(value != null){
                 if(value.getItemCollection().equals(currentCol)){
+                    arrayListId.add(value.getItemId());
                     arrayListName.add(value.getItemName());
                     arrayListDescription.add(value.getItemDescription());
                     arrayListDate.add(value.getItemDate());
@@ -134,6 +136,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
            Intent itemIntent = new Intent(listItem.this,itemDetail.class);
+            itemIntent.putExtra("itemId",arrayListId.get(i));
             itemIntent.putExtra("itemName",arrayListName.get(i));
             itemIntent.putExtra("itemDescription",arrayListDescription.get(i));
             itemIntent.putExtra("itemDate",arrayListDate.get(i));

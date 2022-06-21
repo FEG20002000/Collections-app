@@ -118,7 +118,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
 
     private void insertItemData() {
 
-
+        String id = itemDbReference.child(uid.getUid()).push().getKey();
         String itemName = edtItemName.getText().toString();
         String itemDescription = edtItemDescription.getText().toString();
         String itemDate = dtitemDate.getDayOfMonth() + " " + dtitemDate.getMonth() + " " + dtitemDate.getYear();
@@ -126,8 +126,8 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
         Intent intent = getIntent();
         String itemCollection = intent.getStringExtra("colName");//getting collection name
 
-        Items items = new Items(itemName, itemDescription, modelUri, itemCollection, itemDate);
-        itemDbReference.child(uid.getUid()).push().setValue(items);//setting the items values
+        Items items = new Items(id, itemName, itemDescription, modelUri, itemCollection, itemDate);
+        itemDbReference.child(uid.getUid()).child(id).setValue(items);//setting the items values
     }
 
     public void uploadImage(Uri imgURI) {//to get image to own storage for user

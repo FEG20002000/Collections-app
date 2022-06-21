@@ -8,11 +8,16 @@ package com.iqcollections;
     Author channel/profile url link: https://www.youtube.com/channel/UC3w_uEn4IhvT14rfP5nTl0A
  */
 public class readItems {
+    String itemId;
     String itemName;
     String itemDescription;
     String itemImage;
     String itemDate;
     String itemCollection;
+
+    public String getItemId() { return itemId; }
+
+    public void setItemId(String itemId) { this.itemId = itemId; }
 
     public String getItemName() {
         return itemName;

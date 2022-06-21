@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class itemDetail extends AppCompatActivity {
@@ -27,7 +29,8 @@ public class itemDetail extends AppCompatActivity {
     private ImageView imgItem;
     private String selectedItem;
     private FirebaseUser uid;
-    private Button btnBack;
+    private DatabaseReference rootDbRef;
+    private Button btnBack, btnDeleteItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +41,14 @@ public class itemDetail extends AppCompatActivity {
         description = findViewById(R.id.txtitemDescrip);
         date = findViewById(R.id.txtitemDate);
         imgItem = findViewById(R.id.imgitemView);
-    btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.btnBack);
+        btnDeleteItem = findViewById(R.id.btnDeleteItem);
 
         uid = FirebaseAuth.getInstance().getCurrentUser();
         try {
             Intent itemIntent = getIntent();
             selectedItem = itemIntent.getStringExtra("itemName");
+            String itemId = itemIntent.getStringExtra("itemId");
             String itemDescription = itemIntent.getStringExtra("itemDescription");
             String itemDate = itemIntent.getStringExtra("itemDate");
             String itemImg = itemIntent.getStringExtra("itemIMG");
@@ -57,6 +62,15 @@ public class itemDetail extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(itemDetail.this,MainActivity.class));
+                }
+            });
+
+            btnDeleteItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    rootDbRef = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
+                    rootDbRef.child(itemId).removeValue();
+                    Toast.makeText(itemDetail.this, "Item has been deleted", Toast.LENGTH_SHORT).show();
                 }
             });
 

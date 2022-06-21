@@ -1,6 +1,7 @@
 package com.iqcollections;
 
 public class Items {
+    private String itemId;
     private String itemName;
     private String itemDescription;
     private String itemImage;
@@ -8,7 +9,8 @@ public class Items {
     private String itemCollection;
 
 
-    public Items(String itemName, String itemDescription, String itemImage, String itemCollection, String itemDate) {
+    public Items(String itemId, String itemName, String itemDescription, String itemImage, String itemCollection, String itemDate) {
+        this.itemId = itemId;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemImage = itemImage;
@@ -16,6 +18,10 @@ public class Items {
         this.itemDate = itemDate;
 
     }
+
+    public String getItemId() { return itemId; }
+
+    public void setItemId(String itemId) { this.itemId = itemId; }
 
     public String getItemName() {
         return itemName;

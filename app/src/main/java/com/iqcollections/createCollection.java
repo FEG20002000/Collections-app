@@ -126,7 +126,6 @@ public class createCollection extends AppCompatActivity implements NavigationVie
 
     private void insertCollectionData() {
 
-
         String colName = name.getText().toString();
         String colDescription = description.getText().toString();
         String colGoal = goal.getText().toString();
