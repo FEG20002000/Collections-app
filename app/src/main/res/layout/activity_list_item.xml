@@ -53,6 +53,17 @@
                     android:layout_width="30dp"
                     android:layout_height="15dp"/>
 
+                <ProgressBar
+                    android:id="@+id/goalProg"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="40dp"
+                    style="?android:attr/progressBarStyleHorizontal"
+
+                  />
+
+
+
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="620dp"

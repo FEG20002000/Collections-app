@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-        google = findViewById(R.id.fab_google);
+      //  google = findViewById(R.id.fab_google);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
         edtLoginUser = findViewById(R.id.email);
@@ -64,22 +64,22 @@ public class LoginActivity extends AppCompatActivity {
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        google.setTranslationY(300);
+       // google.setTranslationY(300);
         tabLayout.setTranslationY(300);
 
 
-        google.setAlpha(v);
+    //    google.setAlpha(v);
         tabLayout.setAlpha(v);
         //startActivity(new Intent(this,LoginTabFragment.class));
 
-        google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
-        google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
-        google.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                googleSignIn();
-            }
-        });
+      //  google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
+     //   google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
+      //  google.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+       //     public void onClick(View view) {
+       //         googleSignIn();
+       //     }
+       // });
 
     }
 

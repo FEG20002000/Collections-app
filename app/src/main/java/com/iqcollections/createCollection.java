@@ -66,6 +66,7 @@ public class createCollection extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_collection);
         try {
+            //setting objects
             mAuth = FirebaseAuth.getInstance();
             name = findViewById(R.id.edtName);
             description = findViewById(R.id.edtDesc);
@@ -102,7 +103,7 @@ public class createCollection extends AppCompatActivity implements NavigationVie
                 public void onClick(View view) {
                     String colName = name.getText().toString();
                     String colDescription = description.getText().toString();
-                    String colGoal = goal.getText().toString();
+                    String colGoal = goal.getText().toString();//setting collections info
 
 
                     if (colDescription.isEmpty() || colName.isEmpty() || colGoal.isEmpty() || imgSelected == false) {
@@ -112,7 +113,7 @@ public class createCollection extends AppCompatActivity implements NavigationVie
 
                         Context context = view.getContext();
                         Intent intent = new Intent(context, MainActivity.class);
-                        startActivity(intent);
+                        startActivity(intent);//sending to next activity
                         finish();
                         Toast.makeText(createCollection.this, "Collection successfully created", Toast.LENGTH_SHORT).show();
                     }
@@ -131,7 +132,7 @@ public class createCollection extends AppCompatActivity implements NavigationVie
         String colGoal = goal.getText().toString();
 
         Collections collections = new Collections(colName, colDescription, modelUri, colGoal);
-        collectionDbRef.child(uid.getUid()).push().setValue(collections);
+        collectionDbRef.child(uid.getUid()).push().setValue(collections);//inserting collection data
     }
 
     public void uploadImage(Uri imgURI) {//to get image to own storage for user
@@ -146,7 +147,7 @@ public class createCollection extends AppCompatActivity implements NavigationVie
                         public void onSuccess(Uri uri) {
                             modelUri = uri.toString();
 
-                                insertCollectionData();//has to run here or bugs out for what ever reason
+                                insertCollectionData();//running method
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -186,7 +187,7 @@ public class createCollection extends AppCompatActivity implements NavigationVie
         }
     }
 
-    @Override
+    @Override//nav bar
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_main:

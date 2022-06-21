@@ -36,11 +36,11 @@ public class colAdapter extends RecyclerView.Adapter<colAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         readCollections col = lstCollection.get(position);
-        holder.txtView.setText(col.getColName());
+        holder.txtView.setText(col.getColName());//setting collection name
 
         String imageURI = null;
         imageURI = col.getColImgUrl();
-        Picasso.get().load(imageURI).into(holder.imgView);
+        Picasso.get().load(imageURI).into(holder.imgView);//placing image into recycler view
     }
 
     @Override
@@ -55,12 +55,12 @@ public class colAdapter extends RecyclerView.Adapter<colAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView, rvCollections rvcoll) {
             super(itemView);
             imgView = itemView.findViewById(R.id.imgRecycle);
-            txtView = itemView.findViewById(R.id.txtRecycle);
+            txtView = itemView.findViewById(R.id.txtRecycle);//setting items and texts
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (rvcoll != null) {
-                        int pos = getAdapterPosition();
+                        int pos = getAdapterPosition();//setting adapter postion
                         if (pos != RecyclerView.NO_POSITION) {
                             rvcoll.onItemClick(pos);
                         }

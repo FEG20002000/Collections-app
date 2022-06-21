@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
     private FirebaseUser uid;
     private static String  selectedItem;
     private int counter;
+    private ProgressBar goalProgess;
 
     DrawerLayout dl;
     NavigationView nv;
@@ -62,16 +64,18 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setting objects
         setContentView(R.layout.activity_list_item);
         uid = FirebaseAuth.getInstance().getCurrentUser();
         dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
         txtCol = findViewById(R.id.txtItemCollection);
         listview = (ListView) findViewById(R.id.lstItemsview);
-
+        goalProgess = findViewById(R.id.goalProg);
+//setting list view adapter
         adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayListName);
         listview.setAdapter(adapter);
         Intent intent = getIntent();
-
+    //getting collection information from last page
         currentCol = intent.getStringExtra("currentcolName");
         currentGoal = intent.getStringExtra("colgoal");
         counter=0;
@@ -85,12 +89,12 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
         nv.bringToFront();
         nv.setNavigationItemSelectedListener(this);
-
+        //getting list items
         dbref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 readItems value = snapshot.getValue(readItems.class);
-            if(value != null){
+            if(value != null){//setting list and goal information
                 if(value.getItemCollection().equals(currentCol)){
                     arrayListId.add(value.getItemId());
                     arrayListName.add(value.getItemName());
@@ -100,6 +104,10 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
                     counter++;
                     precentage = (counter/curgoal)*100;
                     String itemscol = "Items avalable for  "+currentCol+":  Goal progress: "+counter+"/"+currentGoal+"  "+precentage+"%" ;
+                    goalProgess.setMax(Integer.parseInt(currentGoal));
+                    goalProgess.setProgress(counter);
+                    goalProgess.refreshDrawableState();
+
                     txtCol.setText(itemscol);
                 }
 
