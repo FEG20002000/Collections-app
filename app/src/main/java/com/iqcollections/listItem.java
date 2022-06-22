@@ -7,6 +7,7 @@ package com.iqcollections;
     Author name/tag/channel: Coding With Tea
     Author channel/profile url link: https://www.youtube.com/c/CodingWithTea
  */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -38,23 +39,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class listItem extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-   private DatabaseReference dbref ;
+    private DatabaseReference dbref;
 
     private ListView listview;
     private TextView txtCol;
     private String currentCol;
     private String currentGoal;
-    private  String goal;
+    private String goal;
     private double precentage;
     private ArrayList<String> arrayListId = new ArrayList<>();
     private ArrayList<String> arrayListName = new ArrayList<>();
-    private ArrayList<String> arrayListDescription= new ArrayList<>();
+    private ArrayList<String> arrayListDescription = new ArrayList<>();
     private ArrayList<String> arrayListIMG = new ArrayList<>();
     private ArrayList<String> arrayListDate = new ArrayList<>();
 
     private ArrayAdapter<String> adapter;
     private FirebaseUser uid;
-    private static String  selectedItem;
+    private static String selectedItem;
     private int counter;
     private ProgressBar goalProgess;
 
@@ -72,13 +73,13 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
         listview = (ListView) findViewById(R.id.lstItemsview);
         goalProgess = findViewById(R.id.goalProg);
 //setting list view adapter
-        adapter= new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,arrayListName);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item, arrayListName);
         listview.setAdapter(adapter);
         Intent intent = getIntent();
-    //getting collection information from last page
+        //getting collection information from last page
         currentCol = intent.getStringExtra("currentcolName");
         currentGoal = intent.getStringExtra("colgoal");
-        counter=0;
+        counter = 0;
         double curgoal = Double.parseDouble(currentGoal);
 
         dl = findViewById(R.id.itemDisplayLayout);
@@ -94,25 +95,26 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 readItems value = snapshot.getValue(readItems.class);
-            if(value != null){//setting list and goal information
-                if(value.getItemCollection().equals(currentCol)){
-                    arrayListId.add(value.getItemId());
-                    arrayListName.add(value.getItemName());
-                    arrayListDescription.add(value.getItemDescription());
-                    arrayListDate.add(value.getItemDate());
-                    arrayListIMG.add(value.getItemImage());
-                    counter++;
-                    precentage = (counter/curgoal)*100;
-                    String itemscol = "Items avalable for  "+currentCol+":  Goal progress: "+counter+"/"+currentGoal+"  "+precentage+"%" ;
-                    goalProgess.setMax(Integer.parseInt(currentGoal));
-                    goalProgess.setProgress(counter);
-                    goalProgess.refreshDrawableState();
+                if (value != null) {//setting list and goal information
+                    if (value.getItemCollection().equals(currentCol)) {
+                        arrayListId.add(value.getItemId());
+                        arrayListName.add(value.getItemName());
+                        arrayListDescription.add(value.getItemDescription());
+                        arrayListDate.add(value.getItemDate());
+                        arrayListIMG.add(value.getItemImage());
+                        counter++;
+                        precentage = (counter / curgoal) * 100;
+                        String itemscol = "Items available for  " + currentCol + ":  Goal progress: " + counter + "/" + currentGoal + "  " + precentage + "%";
+                        goalProgess.setMax(Integer.parseInt(currentGoal));
+                        goalProgess.setProgress(counter);
+                        goalProgess.refreshDrawableState();
 
-                    txtCol.setText(itemscol);
+                        txtCol.setText(itemscol);
+                    }
+
+
+                    adapter.notifyDataSetChanged();
                 }
-
-
-                adapter.notifyDataSetChanged();}
 
             }
 
@@ -138,23 +140,22 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
         });
 
 
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-      listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent itemIntent = new Intent(listItem.this, itemDetail.class);
+                itemIntent.putExtra("itemId", arrayListId.get(i));
+                itemIntent.putExtra("itemName", arrayListName.get(i));
+                itemIntent.putExtra("itemDescription", arrayListDescription.get(i));
+                itemIntent.putExtra("itemDate", arrayListDate.get(i));
+                itemIntent.putExtra("itemIMG", arrayListIMG.get(i));
 
-           Intent itemIntent = new Intent(listItem.this,itemDetail.class);
-            itemIntent.putExtra("itemId",arrayListId.get(i));
-            itemIntent.putExtra("itemName",arrayListName.get(i));
-            itemIntent.putExtra("itemDescription",arrayListDescription.get(i));
-            itemIntent.putExtra("itemDate",arrayListDate.get(i));
-            itemIntent.putExtra("itemIMG",arrayListIMG.get(i));
-
-            startActivity(itemIntent);
+                startActivity(itemIntent);
 
 
-          }
-      });
+            }
+        });
 
     }
 
@@ -180,7 +181,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_create:
                 Intent intent = new Intent(listItem.this, createItem.class);
 
-                intent.putExtra("colName",currentCol);
+                intent.putExtra("colName", currentCol);
 
                 startActivity(intent);
                 finish();

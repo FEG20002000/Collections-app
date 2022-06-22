@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IQCollections">
         <activity
+            android:name=".Graph"
+            android:exported="false" />
+        <activity
             android:name=".groupMembers"
             android:exported="false" />
         <activity

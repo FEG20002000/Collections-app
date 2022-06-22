@@ -197,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements rvCollections, Na
             case R.id.nav_main:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.nav_wish:
                 intent = new Intent(this, wishlist.class);
@@ -212,7 +211,10 @@ public class MainActivity extends AppCompatActivity implements rvCollections, Na
                 intent = new Intent(this, aboutDisplay.class);
                 startActivity(intent);
                 break;
-
+            case R.id.nav_graph:
+                intent = new Intent(this, Graph.class);
+                startActivity(intent);
+                break;
         }
         dl.closeDrawer(GravityCompat.START);
         return true;
