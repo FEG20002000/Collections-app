@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,89 +59,41 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        pieChart = findViewById(R.id.pieChart);
+        try {
+            pieChart = findViewById(R.id.pieChart);
 
-        // hooks
-        dl = findViewById(R.id.graphLayout);
-        nv = findViewById(R.id.nav_view);
-        //nav menu
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dl, R.string.navi_open, R.string.navi_close);
-        dl.addDrawerListener(toggle);
-        toggle.syncState();
-        nv.bringToFront();
-        nv.setNavigationItemSelectedListener(this);
+            // hooks
+            dl = findViewById(R.id.graphLayout);
+            nv = findViewById(R.id.nav_view);
+            //nav menu
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dl, R.string.navi_open, R.string.navi_close);
+            dl.addDrawerListener(toggle);
+            toggle.syncState();
+            nv.bringToFront();
+            nv.setNavigationItemSelectedListener(this);
 
-        uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());// database reference to call the data
+            uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());// database reference to call the data
 
-        // Graph starts from here
-
-
-        //Initialize array list
-
-        //ArrayList<String> barLblNames;
-        //ArrayList<String> list = new ArrayList<>();//Using an arraylist to store the data from firebase
-        //getting items from database
-
-        db = FirebaseDatabase.getInstance().getReference("Collections").child(uid.getUid());
-        dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
+            // Graph starts from here
 
 
-        db.addChildEventListener(new ChildEventListener() {//searching though data
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            //Initialize array list
 
-                readColGraph collections = snapshot.getValue(readColGraph.class);
-                readColGraphs.add(collections);
+            //ArrayList<String> barLblNames;
+            //ArrayList<String> list = new ArrayList<>();//Using an arraylist to store the data from firebase
+            //getting items from database
 
-            }
+            db = FirebaseDatabase.getInstance().getReference("Collections").child(uid.getUid());
+            dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        db.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                countItems();//once data is stored counting items
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-    public void countItems() {
-        for (int i = 0; i < readColGraphs.size(); i++) {//counting items for each collection
-            int e = i;
-            final int[] counter = {0};
-            dbref.addChildEventListener(new ChildEventListener() {//checking each item
+            db.addChildEventListener(new ChildEventListener() {//searching though data
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    readItemGraph value = snapshot.getValue(readItemGraph.class);
 
-                    if (readColGraphs.get(e).getColName().equals(value.getItemCollection())) {
-                        counter[0]++;
-                    }
+                    readColGraph collections = snapshot.getValue(readColGraph.class);
+                    readColGraphs.add(collections);
 
                 }
 
@@ -164,6 +117,52 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
 
                 }
             });
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    countItems();//once data is stored counting items
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }catch (Exception err){
+            Toast.makeText(this, "An error has occured", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void countItems() {
+        for (int i = 0; i < readColGraphs.size(); i++) {//counting items for each collection
+            int e = i;
+            final int[] counter = {0};
+            dbref.addChildEventListener(new ChildEventListener() {//checking each item
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    readItemGraph value = snapshot.getValue(readItemGraph.class);
+
+                    if (readColGraphs.get(e).getColName().equals(value.getItemCollection())) {
+                        counter[0]++;
+                    }
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                }
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
             int f = i;
             dbref.addValueEventListener(new ValueEventListener() {
@@ -172,8 +171,6 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
                     colNumbers.add(f, (float) counter[0]);//adding number of items
                     if (colNumbers.size() >= readColGraphs.size()) {
                         setPieChart();//setting pie chart only if all counts are done
-
-
                     }
                 }
 
