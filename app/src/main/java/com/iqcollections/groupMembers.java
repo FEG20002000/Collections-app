@@ -11,8 +11,6 @@ package com.iqcollections;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -63,7 +61,6 @@ public class groupMembers extends AppCompatActivity implements NavigationView.On
             case R.id.nav_main:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.nav_wish:
                 intent = new Intent(this, wishlist.class);
@@ -78,6 +75,11 @@ public class groupMembers extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, aboutDisplay.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_graph:
+                intent = new Intent(this, Graph.class);
+                startActivity(intent);
+                break;
+
 
         }
         dl.closeDrawer(GravityCompat.START);

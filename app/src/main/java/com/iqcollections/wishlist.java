@@ -121,7 +121,6 @@ public class wishlist extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_main:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.nav_wish:
                 intent = new Intent(this, wishlist.class);
@@ -136,6 +135,11 @@ public class wishlist extends AppCompatActivity implements NavigationView.OnNavi
                 intent = new Intent(this, aboutDisplay.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_graph:
+                intent = new Intent(this, Graph.class);
+                startActivity(intent);
+                break;
+
 
         }
         dl.closeDrawer(GravityCompat.START);

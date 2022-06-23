@@ -15,10 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -38,7 +35,7 @@ import java.util.ArrayList;
 
 public class Graph extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    BarChart barGraph;
+
     PieChart pieChart;
     // drawer menu variables
     DrawerLayout dl;
@@ -47,7 +44,7 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
 
     private ListView wishlistView;
     private FirebaseUser uid;
-    private DatabaseReference db,dbref;
+    private DatabaseReference db, dbref;
 
 
     ArrayList<listItem> listItemsAL = new ArrayList<>();
@@ -55,11 +52,12 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
     ArrayList<Float> colNumbers = new ArrayList<Float>();
     ArrayList<BarEntry> barEntryArrayList = new ArrayList<>();
     ArrayList<PieEntry> pieEntryArrayList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
-        barGraph = findViewById(R.id.barGraph);
+
         pieChart = findViewById(R.id.pieChart);
 
         // hooks
@@ -120,7 +118,7 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                countitems();//once data is stored couning items
+                countItems();//once data is stored counting items
             }
 
             @Override
@@ -131,100 +129,94 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
 
     }
 
-    public void countitems() {
-        for (int i = 0; i < readColGraphs.size();i++){//counting items for each collection
+    public void countItems() {
+        for (int i = 0; i < readColGraphs.size(); i++) {//counting items for each collection
             int e = i;
             final int[] counter = {0};
-        dbref.addChildEventListener(new ChildEventListener() {//checking each item
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                readItemGraph value = snapshot.getValue(readItemGraph.class);
+            dbref.addChildEventListener(new ChildEventListener() {//checking each item
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    readItemGraph value = snapshot.getValue(readItemGraph.class);
 
                     if (readColGraphs.get(e).getColName().equals(value.getItemCollection())) {
                         counter[0]++;
                     }
 
-            }
+                }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
+                }
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-            }
+                }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
 
             int f = i;
             dbref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                colNumbers.add(f, (float) counter[0]);//adding number of items
-                if(colNumbers.size()>= readColGraphs.size()){
-                    setPieChart();//setting piechart only if all counts are done
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    colNumbers.add(f, (float) counter[0]);//adding number of items
+                    if (colNumbers.size() >= readColGraphs.size()) {
+                        setPieChart();//setting pie chart only if all counts are done
+
+
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+
     }
 
-    }
 
-    public void setPieChart(){
+    public void setPieChart() {
         pieChart.clear();
         //Use for loop for the graph data and to get the data
-        for (int i = 0; i < readColGraphs.size();i++){
+        for (int i = 0; i < readColGraphs.size(); i++) {
             String itemId = readColGraphs.get(i).getColName();//data
-            Float itemAmounts= colNumbers.get(i);//data
+            Float itemAmounts = colNumbers.get(i);//data
+
             //Initialize bar chart entry
-          //BarEntry  barEntry = new BarEntry(itemAmounts, Float.parseFloat(itemId));
+            //BarEntry  barEntry = new BarEntry(itemAmounts, Float.parseFloat(itemId));
+
             //Initialize the pie chart entry
-            PieEntry pieEntry = new PieEntry(itemAmounts,itemId);
+            PieEntry pieEntry = new PieEntry(itemAmounts, itemId);
             //add the values to the arraylist
-           // barEntryArrayList.add(barEntry);
-            pieEntryArrayList.add(new PieEntry(itemAmounts,itemId));
+            // barEntryArrayList.add(barEntry);
+
+            pieEntryArrayList.add(new PieEntry(itemAmounts, itemId));
 
         }
-        // Initialize the bar data set
-        BarDataSet barDataSetItems = new BarDataSet(barEntryArrayList, "Collections");
-        // set the colors for the bar graph
-        barDataSetItems.setColors(ColorTemplate.COLORFUL_COLORS);
-       //Hide draw value
-        barDataSetItems.setDrawValues(false);
-        //Set the bar data
-        barGraph.setData((new BarData(barDataSetItems)));
-        //set the animation of the graph
-        barGraph.animateY(5000);
-        //set the description of the graph text and color
-        barGraph.getDescription().setText("Items Chart");
-        barGraph.getDescription().setTextColor(Color.BLUE);
+
 
         // Initialize the bar data set
         PieDataSet pieDataSetItems = new PieDataSet(pieEntryArrayList, "Collections");
         // set the colors for the bar graph
         pieDataSetItems.setColors(ColorTemplate.COLORFUL_COLORS);
         //Hide draw value
-       //pieDataSetItems.setDrawValues(true);
+        //pieDataSetItems.setDrawValues(true);
         //Set the bar data
         pieChart.setData((new PieData(pieDataSetItems)));
         //set the animation of the graph
-        pieChart.animateY(5000 );
+        pieChart.animateY(5000);
         //set the description of the graph text and color
         pieChart.getDescription().setText("Items Chart");
         pieChart.getDescription().setTextColor(Color.BLUE);
@@ -276,6 +268,7 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
                 intent = new Intent(this, Graph.class);
                 startActivity(intent);
                 break;
+
         }
         dl.closeDrawer(GravityCompat.START);
         return true;
