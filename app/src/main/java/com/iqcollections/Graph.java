@@ -35,18 +35,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Graph extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-
     PieChart pieChart;
     // drawer menu variables
     DrawerLayout dl;
     NavigationView nv;
-
-
+    //piechart  varaibles
     private ListView wishlistView;
     private FirebaseUser uid;
     private DatabaseReference db, dbref;
-
 
     ArrayList<listItem> listItemsAL = new ArrayList<>();
     ArrayList<readColGraph> readColGraphs = new ArrayList<>();
@@ -59,9 +55,8 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        try {
+        try {//excpetion handling
             pieChart = findViewById(R.id.pieChart);
-
             // hooks
             dl = findViewById(R.id.graphLayout);
             nv = findViewById(R.id.nav_view);
@@ -71,100 +66,60 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
             toggle.syncState();
             nv.bringToFront();
             nv.setNavigationItemSelectedListener(this);
-
+    //user and data ingormation
             uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());// database reference to call the data
-
-            // Graph starts from here
-
-
-            //Initialize array list
-
-            //ArrayList<String> barLblNames;
-            //ArrayList<String> list = new ArrayList<>();//Using an arraylist to store the data from firebase
-            //getting items from database
-
             db = FirebaseDatabase.getInstance().getReference("Collections").child(uid.getUid());
             dbref = FirebaseDatabase.getInstance().getReference("Items").child(uid.getUid());
-
-
+            // Graph starts from here
+            //getting items from database
             db.addChildEventListener(new ChildEventListener() {//searching though data
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                    readColGraph collections = snapshot.getValue(readColGraph.class);
-                    readColGraphs.add(collections);
-
+                    readColGraph collections = snapshot.getValue(readColGraph.class);//reading collections from database
+                    readColGraphs.add(collections);//adding collections
                 }
 
                 @Override
-                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
+                @Override public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override public void onCancelled(@NonNull DatabaseError error) {}
             });
-            db.addValueEventListener(new ValueEventListener() {
+
+            db.addValueEventListener(new ValueEventListener() {//checking for end of data reading
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     countItems();//once data is stored counting items
                 }
-
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
+                public void onCancelled(@NonNull DatabaseError error) {}
             });
         }catch (Exception err){
+
             Toast.makeText(this, "An error has occured", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void countItems() {
+    public void countItems() {//top count items in database
         for (int i = 0; i < readColGraphs.size(); i++) {//counting items for each collection
             int e = i;
             final int[] counter = {0};
             dbref.addChildEventListener(new ChildEventListener() {//checking each item
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    readItemGraph value = snapshot.getValue(readItemGraph.class);
-
+                    readItemGraph value = snapshot.getValue(readItemGraph.class);//reading items in database
                     if (readColGraphs.get(e).getColName().equals(value.getItemCollection())) {
-                        counter[0]++;
+                        counter[0]++;//adding count of items
                     }
-
                 }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                }
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
+                @Override public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
+                @Override public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+                @Override public void onCancelled(@NonNull DatabaseError error) {}
             });
 
-            int f = i;
+            int f = i;//counter in array
             dbref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -174,51 +129,38 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
                     }
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
+                @Override public void onCancelled(@NonNull DatabaseError error) {}
             });
         }
 
     }
 
 
-    public void setPieChart() {
-        pieChart.clear();
+    public void setPieChart() {//drawing piechart
+        pieChart.clear();//clearing chart
         //Use for loop for the graph data and to get the data
         for (int i = 0; i < readColGraphs.size(); i++) {
             String itemId = readColGraphs.get(i).getColName();//data
             Float itemAmounts = colNumbers.get(i);//data
-
-            //Initialize bar chart entry
-            //BarEntry  barEntry = new BarEntry(itemAmounts, Float.parseFloat(itemId));
-
             //Initialize the pie chart entry
             PieEntry pieEntry = new PieEntry(itemAmounts, itemId);
             //add the values to the arraylist
-            // barEntryArrayList.add(barEntry);
-
             pieEntryArrayList.add(new PieEntry(itemAmounts, itemId));
 
         }
-
-
         // Initialize the bar data set
         PieDataSet pieDataSetItems = new PieDataSet(pieEntryArrayList, "Collections");
         // set the colors for the bar graph
         pieDataSetItems.setColors(ColorTemplate.COLORFUL_COLORS);
         //Hide draw value
         //pieDataSetItems.setDrawValues(true);
-        //Set the bar data
+        //Set the pie data
         pieChart.setData((new PieData(pieDataSetItems)));
         //set the animation of the graph
-        pieChart.animateY(5000);
+        pieChart.animateY(5000);//drawing piechart
         //set the description of the graph text and color
         pieChart.getDescription().setText("Items Chart");
-        pieChart.getDescription().setTextColor(Color.BLUE);
-
-
+        pieChart.getDescription().setTextColor(Color.BLUE);//setting descrption
     }
 
 
