@@ -2,7 +2,9 @@ package com.iqcollections;
 
 public class readCollections {
 
-    String colName, colImgUrl, colGoal;
+    String colId, colName, colImgUrl, colGoal;
+
+    public String getColId() { return colId; }
 
     public String getColGoal() {
         return colGoal;

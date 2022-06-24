@@ -10,6 +10,7 @@ package com.iqcollections;
 
 // this class stores all the constructors as well as the get and set methods for the wishlist function
 public class wishClass {
+    private String wishId;
     private String wishName;
     private String wishDesc;
     private String wishPrice;
@@ -19,11 +20,16 @@ public class wishClass {
 
     }
 
-    public wishClass(String wishName, String wishDesc, String wishPrice) {
+    public wishClass(String wishId, String wishName, String wishDesc, String wishPrice) {
+        this.wishId = wishId;
         this.wishName = wishName;
         this.wishDesc = wishDesc;
         this.wishPrice = wishPrice;
     }
+
+    public String getWishId() { return wishId; }
+
+    public void setWishId(String wishId) { this.wishId = wishId; }
 
     public String getWishName() {
         return wishName;

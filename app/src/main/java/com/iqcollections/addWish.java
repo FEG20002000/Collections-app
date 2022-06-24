@@ -91,8 +91,8 @@ public class addWish extends AppCompatActivity {
 
     private void addWishlistData() {
         try {
+            String id = wishlistDbRef.child(uid.getUid()).push().getKey();
             String name = etName.getText().toString();
-
             String desc = etDesc.getText().toString();
             String price = etPrice.getText().toString();
 
@@ -101,8 +101,8 @@ public class addWish extends AppCompatActivity {
                 Toast.makeText(addWish.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
             } else {
 
-                wishClass wishClass = new wishClass(name, desc, price);
-                wishlistDbRef.child(uid.getUid()).push().setValue(wishClass);
+                wishClass wishClass = new wishClass(id, name, desc, price);
+                wishlistDbRef.child(uid.getUid()).child(id).setValue(wishClass);
             }
         } catch (Exception e) {
             Toast.makeText(this, "An error has occurred" + e.toString(), Toast.LENGTH_SHORT).show();

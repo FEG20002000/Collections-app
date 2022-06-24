@@ -126,13 +126,13 @@ public class createCollection extends AppCompatActivity implements NavigationVie
     }
 
     private void insertCollectionData() {
-
+        String id = collectionDbRef.child(uid.getUid()).push().getKey();
         String colName = name.getText().toString();
         String colDescription = description.getText().toString();
         String colGoal = goal.getText().toString();
 
-        Collections collections = new Collections(colName, colDescription, modelUri, colGoal);
-        collectionDbRef.child(uid.getUid()).push().setValue(collections);//inserting collection data
+        Collections collections = new Collections(id, colName, colDescription, modelUri, colGoal);
+        collectionDbRef.child(uid.getUid()).child(id).setValue(collections);//inserting collection data
     }
 
     public void uploadImage(Uri imgURI) {//to get image to own storage for user

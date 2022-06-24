@@ -16,9 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +45,7 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
 
     private ListView listview;
     private TextView txtCol;
+    private String currentId;
     private String currentCol;
     private String currentGoal;
     private String goal;
@@ -52,7 +55,8 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
     private ArrayList<String> arrayListDescription = new ArrayList<>();
     private ArrayList<String> arrayListIMG = new ArrayList<>();
     private ArrayList<String> arrayListDate = new ArrayList<>();
-
+    private Button btnBack, btnDeleteColl;
+    private DatabaseReference rootDbRef;
     private ArrayAdapter<String> adapter;
     private FirebaseUser uid;
     private static String selectedItem;
@@ -72,11 +76,14 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
         txtCol = findViewById(R.id.txtItemCollection);
         listview = (ListView) findViewById(R.id.lstItemsview);
         goalProgess = findViewById(R.id.goalProg);
+        btnBack = findViewById(R.id.btnBack);
+        btnDeleteColl = findViewById(R.id.btnDeleteColl);
 //setting list view adapter
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item, arrayListName);
         listview.setAdapter(adapter);
         Intent intent = getIntent();
         //getting collection information from last page
+        currentId = intent.getStringExtra("selectedId");
         currentCol = intent.getStringExtra("currentcolName");
         currentGoal = intent.getStringExtra("colgoal");
         counter = 0;
@@ -157,6 +164,21 @@ public class listItem extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
+        btnDeleteColl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rootDbRef = FirebaseDatabase.getInstance().getReference("Collections").child(uid.getUid());
+                rootDbRef.child(currentId).removeValue();
+                Toast.makeText(listItem.this, "This collection has been deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(listItem.this,MainActivity.class));
+            }
+        });
     }
 
     public String getSelectedItem() {

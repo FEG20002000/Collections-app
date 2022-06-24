@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements rvCollections, Na
     @Override
     public void onItemClick(int pos) {
         Intent intent = new Intent(MainActivity.this, listItem.class);
+        intent.putExtra("selectedId", lstCollections.get(pos).getColId());
         intent.putExtra("currentcolName", lstCollections.get(pos).getColName());
         intent.putExtra("colgoal", lstCollections.get(pos).getColGoal());
         startActivity(intent);
