@@ -7,11 +7,15 @@ package com.iqcollections;
     Author name/tag/channel: Be Codey
     Author channel/profile url link: https://www.youtube.com/c/BeCodey
  */
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -21,10 +25,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -39,11 +50,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+
 public class createItem extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private EditText edtItemName, edtItemDescription;
     private DatePicker dtitemDate;
-    private Button btnImageSelect, btnCreate;
+    private Button btnImageSelect, btnCreate,btnCamera;
     private ImageView imgItem;
     private FirebaseAuth mAuth;
     private FirebaseUser uid;
@@ -54,17 +71,20 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
     Boolean imgSelected = false;
     DrawerLayout dl;
     NavigationView nv;
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_item);
 
+
 //setting objects
         edtItemDescription = findViewById(R.id.edtitemDesc);
         edtItemName = findViewById(R.id.edtItemname);
         dtitemDate = findViewById(R.id.dtpItemDate);
         btnImageSelect = findViewById(R.id.selectitemimg);
+        btnCamera = findViewById(R.id.selectitemCamera);
         btnCreate = findViewById(R.id.btnCreateitem);
         imgItem = findViewById(R.id.imgItemhold);
 
@@ -91,6 +111,35 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
                 startActivityForResult(galleryIntent, 2);//sending image intent
             }
         });
+
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ContextCompat.checkSelfPermission(createItem.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(createItem.this,new String[]{Manifest.permission.CAMERA},100);
+                }
+                if(ContextCompat.checkSelfPermission(createItem.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(createItem.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+                }
+
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                activityResultLauncher.launch(cameraIntent);
+                imgSelected = true;
+            }
+        });
+
+    activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            Bundle extras =result.getData().getExtras();
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            WeakReference<Bitmap> result1 =  new WeakReference<>(Bitmap.createScaledBitmap(bitmap,bitmap.getHeight(),bitmap.getWidth(),false).copy(
+                    Bitmap.Config.RGB_565,true));
+            Bitmap bm = result1.get();
+            imgURI = saveimage(bm,createItem.this);
+            imgItem.setImageURI(imgURI);
+        }
+    });
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +156,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
                     Context context = view.getContext();
                     Intent intent = new Intent(context, MainActivity.class);
                     startActivity(intent);
-                    finish();//sending to next screem
+                    finish();//sending to next screen
                     Toast.makeText(createItem.this, "Item successfully created, please reselect collection", Toast.LENGTH_SHORT).show();
 
                 }
@@ -166,6 +215,7 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -175,7 +225,25 @@ public class createItem extends AppCompatActivity implements NavigationView.OnNa
 
         }
     }
+private Uri saveimage(Bitmap image,Context context ){
+        File imageFolder = new File(context.getCacheDir(),"images");
+        Uri uri = null;
+        try{
+            imageFolder.mkdirs();
+            File file = new File(imageFolder,"captured_image.jpg");
+            FileOutputStream stream = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.JPEG,100,stream);
+            stream.flush();
+            stream.close();
+            uri = FileProvider.getUriForFile(context.getApplicationContext(),BuildConfig.APPLICATION_ID+".provider", file);
 
+        }catch (FileNotFoundException e){
+            Toast.makeText(context, "There was a file error", Toast.LENGTH_SHORT).show();
+        }catch (IOException er){
+            Toast.makeText(context, "There was an Store error", Toast.LENGTH_SHORT).show();
+        }
+        return uri;
+}
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
