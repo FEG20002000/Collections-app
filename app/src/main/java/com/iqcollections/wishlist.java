@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -33,11 +35,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class wishlist extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String WISHID = "wishId";
+    public static final String WISHNAME = "wishName";
+    public static final String WISHDESCR = "wishDescr";
+    public static final String WISHPRICE = "wishPrice";
+
     private ListView wishlistView;
     private FirebaseUser uid;
+    List<wishClass> wishClassList;
+    private DatabaseReference dbref;
     DrawerLayout dl;
     NavigationView nv;
 
@@ -48,9 +58,12 @@ public class wishlist extends AppCompatActivity implements NavigationView.OnNavi
 
         wishlistView = findViewById(R.id.wishlistView);
         uid = FirebaseAuth.getInstance().getCurrentUser();// setting the main user
-        ArrayList<String> list = new ArrayList<>();//Using an arraylist to store the data from firebase
-        ArrayAdapter adapter = new ArrayAdapter<String>(wishlist.this, R.layout.wishlist_item, list);
-        wishlistView.setAdapter(adapter);
+//        ArrayList<String> list = new ArrayList<>();//Using an arraylist to store the data from firebase
+//        ArrayAdapter adapter = new ArrayAdapter<String>(wishlist.this, R.layout.wishlist_item, list);
+//        wishlistView.setAdapter(adapter);
+
+        dbref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());
+        wishClassList = new ArrayList<>();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid.getUid());// database reference to call the data
 
@@ -63,6 +76,21 @@ public class wishlist extends AppCompatActivity implements NavigationView.OnNavi
         nv.bringToFront();
         nv.setNavigationItemSelectedListener(this);
 
+        wishlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                wishClass wish = wishClassList.get(i);
+
+                Intent intent = new Intent(getApplicationContext(), WishlistItemDetail.class);
+                intent.putExtra(WISHID, wish.getWishId());
+                intent.putExtra(WISHNAME, wish.getWishName());
+                intent.putExtra(WISHDESCR, wish.getWishDesc());
+                intent.putExtra(WISHPRICE, wish.getWishPrice());
+
+                startActivity(intent);
+            }
+        });
+/*
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -76,6 +104,33 @@ public class wishlist extends AppCompatActivity implements NavigationView.OnNavi
                     list.add(txt);
                 }
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+ */
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                wishClassList.clear();
+                for(DataSnapshot wishlistSnapshot : snapshot.getChildren())
+                {
+                    wishClass wish = wishlistSnapshot.getValue(wishClass.class);
+
+                    wishClassList.add(wish);
+                }
+                WListList adapter = new WListList(wishlist.this, wishClassList);
+                wishlistView.setAdapter(adapter);
             }
 
             @Override

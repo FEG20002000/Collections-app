@@ -5,6 +5,7 @@
     android:padding="10dp"
     android:textSize="16dp"
     android:textStyle="bold"
-    android:textColor="@color/slateGrey">
+    android:textColor="@color/slateGrey"
+    android:id="@+id/txtWishListItem">
 
 </TextView>
