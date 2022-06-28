@@ -137,14 +137,19 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
 
     public void setPieChart() {//drawing piechart
         pieChart.clear();//clearing chart
+        float total = 0;
+        for(int y = 0; y< colNumbers.size();y++){
+            total = total + colNumbers.get(y);
+        }
         //Use for loop for the graph data and to get the data
         for (int i = 0; i < readColGraphs.size(); i++) {
             String itemId = readColGraphs.get(i).getColName();//data
             Float itemAmounts = colNumbers.get(i);//data
+            Float percentage = (itemAmounts/total)*100;
             //Initialize the pie chart entry
-            PieEntry pieEntry = new PieEntry(itemAmounts, itemId);
+            PieEntry pieEntry = new PieEntry(percentage, itemId);
             //add the values to the arraylist
-            pieEntryArrayList.add(new PieEntry(itemAmounts, itemId));
+            pieEntryArrayList.add(new PieEntry(percentage, itemId));
 
         }
         // Initialize the bar data set
