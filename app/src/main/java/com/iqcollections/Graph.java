@@ -153,6 +153,7 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
 
         }
         // Initialize the bar data set
+
         PieDataSet pieDataSetItems = new PieDataSet(pieEntryArrayList, "Collections");
         // set the colors for the bar graph
         pieDataSetItems.setColors(ColorTemplate.COLORFUL_COLORS);
